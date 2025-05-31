@@ -31,7 +31,7 @@ When I’m not decoding smart contracts or tinkering with blockchain tech, you�
 
  Curious about what I’ve built? Check out [some things](/projects) I’ve launched as a web developer.
 
-Always learning, always building—on-chain and beyond.
+Always learning, always building-on-chain and beyond.
 
 ## Miscellaneous
 
