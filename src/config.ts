@@ -13,5 +13,14 @@ export const THEME = {
   lastUpdatedText: "Last updated: "
 };
 
+export const GISCUS = {
+  repo: "manishyoudumb/mxnish-me",
+  repoId: "R_kgDOJqXxXw",
+  category: "Comments",
+  categoryId: "DIC_kwDOJqXxX84CXqXx",
+  light: "light",
+  dark: "dark"
+};
+
 
 
