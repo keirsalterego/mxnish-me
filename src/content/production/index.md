@@ -305,42 +305,36 @@ title: Video Production
 
 <script>
   function togglePlay(video) {
-    const button = video.closest('.group').querySelector('button');
-    const playIcon = button.querySelector('.play-icon');
-    const pauseIcon = button.querySelector('.pause-icon');
-    
     if (video.paused) {
-      // Pause all other videos first
+      // Stop all other playing videos first
       document.querySelectorAll('video').forEach(v => {
-        if (v !== video) {
+        if (v !== video && !v.paused) {
           v.pause();
-          const otherButton = v.closest('.group').querySelector('button');
-          otherButton.querySelector('.play-icon').classList.remove('hidden');
-          otherButton.querySelector('.pause-icon').classList.add('hidden');
+          v.closest('.group').querySelector('.play-icon').classList.remove('hidden');
+          v.closest('.group').querySelector('.pause-icon').classList.add('hidden');
         }
       });
       
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          video.muted = false;
-          playIcon.classList.add('hidden');
-          pauseIcon.classList.remove('hidden');
-        }).catch(error => {
-          console.error('Error playing video:', error);
-        });
-      }
+      // Play the clicked video
+      video.play();
+      video.closest('.group').querySelector('.play-icon').classList.add('hidden');
+      video.closest('.group').querySelector('.pause-icon').classList.remove('hidden');
     } else {
       video.pause();
-      playIcon.classList.remove('hidden');
-      pauseIcon.classList.add('hidden');
+      video.closest('.group').querySelector('.play-icon').classList.remove('hidden');
+      video.closest('.group').querySelector('.pause-icon').classList.add('hidden');
     }
   }
 
-  // Initialize all videos as paused and muted
-  document.querySelectorAll('video').forEach(video => {
-    video.pause();
-    video.muted = true;
+  // Add click event listeners to all videos
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        togglePlay(video);
+      });
+    });
   });
 </script>
 
