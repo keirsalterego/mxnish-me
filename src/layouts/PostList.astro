@@ -1,0 +1,76 @@
+---
+import { slugify } from "@renovamen/utils";
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import ToggleLang from "@components/ToggleLang.astro";
+import {
+  getPostDate,
+  getPosts,
+  getPostsByTag,
+  getSortedPostsByYear,
+  getTags,
+  formatDate
+} from "@utils";
+
+export interface Props {
+  lang: string;
+  tag?: string;
+}
+
+const { lang, tag } = Astro.props;
+
+const title = lang === "en" ? "Blog" : "博客";
+const allURL = `/posts/${lang === "en" ? "" : lang + "/"}`;
+const tagURL = `${allURL}tags/`;
+
+const posts = await getPosts(lang);
+const { tags, numPostsPerTag } = getTags(posts);
+const sortedPostsByYear = getSortedPostsByYear(tag ? getPostsByTag(posts, tag) : posts);
+---
+
+<Layout title={`${title} - ${SITE.title}`} activePage={"posts"}>
+  <h1>{title} <ToggleLang /></h1>
+
+  <!-- tag list -->
+  <span class="mr-1.5 -space-x-0.5 text-fg-light">
+    <span class="i-uil:tag-alt size-4"></span>
+    <a href={allURL} class={`!nav-item ${!tag && "!nav-active"}`}>all</a>
+    <sup>{numPostsPerTag["all"]}</sup>
+  </span>
+
+  {
+    tags.map((t) => (
+      <span class="mr-1.5 -space-x-0.5 text-fg-light">
+        <span class="i-uil:tag-alt size-4" />
+        {/* eslint-disable-next-line format/prettier */}
+        <a href={tagURL + slugify(t)} class={`!nav-item ${t === tag && '!nav-active'}`}>{t}</a>
+        <sup>{numPostsPerTag[t]}</sup>
+      </span>
+    ))
+  }
+
+  <!-- blog list -->
+  {
+    Object.keys(sortedPostsByYear)
+      .sort((a, b) => b.localeCompare(a))
+      .map((year) => (
+        <div>
+          <h3>{year}</h3>
+          {sortedPostsByYear[year].map((item) => (
+            <div flex items-start m="y-1 x-0.5">
+              <div class="w-14 h-6 leading-6 mr-2" text="fg-light sm">
+                {formatDate(getPostDate(item.id), 1)}
+              </div>
+              <a
+                class="flex-1 !text-fg underline-offset-4"
+                href={`/posts/${item.id}`}
+                transition:name={item.id}
+              >
+                {item.data.title}
+              </a>
+            </div>
+          ))}
+        </div>
+      ))
+  }
+</Layout>
