@@ -17,9 +17,9 @@ title: Video Production
   <div class="absolute -bottom-2 left-0 w-24 h-1 bg-white"></div>
 </div>
 
-<div class="flex gap-4">
+<div class="flex flex-col md:flex-row gap-4">
   <!-- First Video -->
-  <div class="max-w-[140px] mx-left group">
+  <div class="w-full md:max-w-[140px] mx-auto md:mx-0 group">
     <a href="https://www.instagram.com/p/DFiJuXkTYEX/" target="_blank" rel="noopener noreferrer" class="block">
       <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <video 
@@ -51,7 +51,7 @@ title: Video Production
   </div>
 
   <!-- Second Video -->
-  <div class="max-w-[200px] mx-left group">
+  <div class="w-full md:max-w-[200px] mx-auto md:mx-0 group">
     <a href="https://www.instagram.com/reel/DJ5qhuRupxL/" target="_blank" rel="noopener noreferrer" class="block">
       <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <video 
@@ -83,7 +83,7 @@ title: Video Production
   </div>
 
   <!-- Third Video -->
-  <div class="max-w-[220px] mx-left group">
+  <div class="w-full md:max-w-[220px] mx-auto md:mx-0 group">
     <a href="https://www.instagram.com/reel/DJHaXb-yfzG/" target="_blank" rel="noopener noreferrer" class="block">
       <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <video 
@@ -115,7 +115,7 @@ title: Video Production
   </div>
 
   <!-- CEO Testimonial -->
-  <div class="max-w-[300px] ml-4">
+  <div class="w-full md:max-w-[300px] mx-auto md:mx-0 mt-4 md:mt-0">
     <div class="bg-gray-50 p-6 rounded-lg">
       <blockquote class="text-gray-700 italic mb-4">
         "The creative excellence and technical precision demonstrated in these videos perfectly align with 
@@ -139,9 +139,9 @@ title: Video Production
   <div class="absolute -bottom-2 left-0 w-24 h-1 bg-white"></div>
 </div>
 
-<div class="flex gap-4">
+<div class="flex flex-col md:flex-row gap-4">
   <!-- Fourth Video -->
-  <div class="max-w-[160px] mx-left group">
+  <div class="w-full md:max-w-[160px] mx-auto md:mx-0 group">
     <a href="#" target="_blank" rel="noopener noreferrer" class="block">
       <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <video 
@@ -173,7 +173,7 @@ title: Video Production
   </div>
 
   <!-- Fifth Video -->
-  <div class="max-w-[180px] mx-left group">
+  <div class="w-full md:max-w-[180px] mx-auto md:mx-0 group">
     <a href="#" target="_blank" rel="noopener noreferrer" class="block">
       <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <video 
@@ -205,7 +205,7 @@ title: Video Production
   </div>
 
   <!-- Stoned CEO Testimonial -->
-  <div class="max-w-[300px] ml-4">
+  <div class="w-full md:max-w-[300px] mx-auto md:mx-0 mt-4 md:mt-0">
     <div class="bg-gray-50 p-6 rounded-lg">
       <blockquote class="text-gray-700 italic mb-4">
         "The dynamic editing style and creative vision brought to our projects has elevated our brand's 
@@ -229,9 +229,9 @@ title: Video Production
   <div class="absolute -bottom-2 left-0 w-24 h-1 bg-white"></div>
 </div>
 
-<div class="flex gap-4">
+<div class="flex flex-col md:flex-row gap-4">
   <!-- Sixth Video -->
-  <div class="max-w-[160px] mx-left group">
+  <div class="w-full md:max-w-[160px] mx-auto md:mx-0 group">
     <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <video 
         class="w-full rounded-lg [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-enclosure]:!hidden [&::-webkit-media-controls-panel]:!hidden transition-all duration-300 group-hover:brightness-110 group-hover:blur-sm"
@@ -255,7 +255,7 @@ title: Video Production
   </div>
 
   <!-- Seventh Video -->
-  <div class="max-w-[180px] mx-left group">
+  <div class="w-full md:max-w-[180px] mx-auto md:mx-0 group">
     <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <video 
         class="w-full rounded-lg [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-enclosure]:!hidden [&::-webkit-media-controls-panel]:!hidden transition-all duration-300 group-hover:brightness-110 group-hover:blur-sm"
@@ -279,7 +279,7 @@ title: Video Production
   </div>
 
   <!-- Eighth Video -->
-  <div class="max-w-[200px] mx-left group">
+  <div class="w-full md:max-w-[200px] mx-auto md:mx-0 group">
     <div class="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <video 
         class="w-full rounded-lg [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-enclosure]:!hidden [&::-webkit-media-controls-panel]:!hidden transition-all duration-300 group-hover:brightness-110 group-hover:blur-sm"
