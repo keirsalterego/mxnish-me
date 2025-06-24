@@ -55,7 +55,7 @@ export const Navbar: Component<{
         </Show>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .nav-btn {
           color: var(--fg-light);
           padding: 0.15rem 0.7rem;

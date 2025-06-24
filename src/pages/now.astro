@@ -1,11 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import fs from 'fs';
+import nowRaw from '../content/now.md?raw';
 import { marked } from 'marked';
 
-// Read and split now.md into entries
-const nowPath = new URL('../content/now.md', import.meta.url);
-const nowRaw = fs.readFileSync(nowPath, 'utf-8');
+// Split now.md into entries
 const entries = nowRaw.split(/\n---+\n/).map(e => e.trim()).filter(Boolean);
 const [latest, ...archive] = entries;
 ---
