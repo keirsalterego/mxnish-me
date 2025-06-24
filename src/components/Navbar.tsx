@@ -1,5 +1,4 @@
-import { onMount, createEffect, createSignal, Show, type Component } from "solid-js";
-import { useScroll } from "solidjs-use";
+import { Show, type Component } from "solid-js";
 import ToggleDark from "@components/ToggleDark";
 import ToggleToc from "@components/ToggleToc";
 
@@ -7,96 +6,93 @@ export const Navbar: Component<{
   activePage?: string;
   hasToc?: boolean;
 }> = (props) => {
-  const [isFixed, setIsFixed] = createSignal(false);
-  const [isVisible, setIsVisible] = createSignal(false);
-
-  const [navbar, setNavbar] = createSignal<HTMLDivElement>();
-
-  onMount(() => {
-    const { y, directions } = useScroll(document);
-
-    createEffect(() => {
-      if (directions.top) {
-        // scrolling up
-        if (y() > 0 && isFixed()) setIsVisible(true);
-        else {
-          setIsVisible(false);
-          setIsFixed(false);
-        }
-      } else if (directions.bottom) {
-        // scrolling down
-        setIsVisible(false);
-        if (y() > (navbar()?.offsetHeight ?? 0)) setIsFixed(true);
-      }
-    });
-  });
-
   return (
     <header
-      ref={setNavbar}
-      class={`z-30 w-full h-14 hstack justify-between bg-bg font-ui px-4 md:px-5 ${
-        isFixed() && "fixed -top-14 left-0 transition duration-300 border-b"
-      } ${isVisible() && "translate-y-full shadow"} ${
-        !isFixed() && !isVisible() && "absolute top-0 left-0"
-      }`}
+      class="z-50 fixed left-1/2 top-4 -translate-x-1/2 w-auto min-w-fit max-w-xl h-11 flex items-center justify-center bg-bg/95 dark:bg-bg-dark/95 border border-white/10 dark:border-black/20 shadow-md rounded-lg font-ui px-2 md:px-4"
+      style="transition: box-shadow 0.2s, background 0.2s;"
     >
-      <a class="font-bold text-fg-light hover:text-fg-dark" href="/">
-        <span text-lg>hi@mxnish</span>
-        <div class="prompt i-fa6-solid:angle-right inline-block" />
-        <span class="blink">_</span>
-      </a>
-
-      <nav hstack gap-x-4>
-        <a
-          class={`nav-item ${props.activePage === "production" && "nav-active"}`}
-          href="/production"
-          aria-label="Video Production"
-        >
-          <div i-lucide:scroll class="md:hidden size-4.5" />
-          <span lt-md:hidden>Video Work</span>
+      {/* Left: Logo */}
+      <div class="flex items-center min-w-0">
+        <a class="font-semibold text-fg-light hover:text-fg-dark text-base tracking-tight flex items-center gap-1" href="/">
+          hi@mxnish
+          <span class="blink">_</span>
         </a>
+      </div>
 
+      {/* Center: Nav Links */}
+      <nav class="flex items-center gap-x-2 mx-1 text-sm font-medium">
         <a
-          class={`nav-item ${props.activePage === "projects" && "nav-active"}`}
+          class={`nav-btn${props.activePage === "projects" ? " nav-btn-active" : ""}`}
           href="/projects"
-          aria-label="Projects"
         >
-          <div i-ph:rocket-launch-duotone class="md:hidden" />
-          <span lt-md:hidden>Dev Projects</span>
+          Builds
         </a>
-
         <a
-          class={`nav-item ${props.activePage === "posts" && "nav-active"}`}
+          class={`nav-btn${props.activePage === "posts" ? " nav-btn-active" : ""}`}
           href="/posts"
-          aria-label="Blogs"
         >
-          <div i-majesticons:pencil-line class="md:hidden" />
-          <span lt-md:hidden>Blog</span>
+          Articles
         </a>
-
         <a
-          class={`nav-item ${props.activePage === "now" && "nav-active"}`}
+          class={`nav-btn${props.activePage === "now" ? " nav-btn-active" : ""}`}
           href="/now"
-          aria-label="Now"
         >
-          <div i-lucide:clock class="md:hidden" />
-          <span lt-md:hidden>Now</span>
+          Log
         </a>
-
         <a
-          class={`nav-item ${props.activePage === "search" && "nav-active"}`}
+          class={`nav-btn${props.activePage === "search" ? " nav-btn-active" : ""}`}
           href="/search"
-          aria-label="Search"
         >
           <span i-uil:search />
         </a>
+      </nav>
 
+      {/* Right: Toggles */}
+      <div class="flex items-center min-w-0 gap-x-1 ml-1">
         <ToggleDark />
-
         <Show when={props.hasToc}>
           <ToggleToc />
         </Show>
-      </nav>
+      </div>
+
+      <style jsx>{`
+        .nav-btn {
+          color: var(--fg-light);
+          padding: 0.15rem 0.7rem;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: background 0.15s, color 0.15s;
+          font-weight: 500;
+        }
+        .nav-btn:hover {
+          background: #f3f4f6;
+          color: var(--fg-dark);
+        }
+        .nav-btn-active {
+          background: #e5e7eb;
+          color: var(--fg-dark);
+          border-radius: 6px;
+        }
+        @media (prefers-color-scheme: dark) {
+          .nav-btn:hover {
+            background: #23272e;
+            color: #fff;
+          }
+          .nav-btn-active {
+            background: #23272e;
+            color: #fff;
+            border-radius: 6px;
+          }
+        }
+        .blink {
+          animation: blink 1.1s steps(2, start) infinite;
+        }
+        @keyframes blink {
+          to {
+            visibility: hidden;
+          }
+        }
+      `}</style>
     </header>
   );
 };

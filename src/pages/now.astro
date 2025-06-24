@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import fs from 'fs';
+import { marked } from 'marked';
+
+// Read and split now.md into entries
+const nowPath = new URL('../content/now.md', import.meta.url);
+const nowRaw = fs.readFileSync(nowPath, 'utf-8');
+const entries = nowRaw.split(/\n---+\n/).map(e => e.trim()).filter(Boolean);
+const [latest, ...archive] = entries;
 ---
 
 <Layout title="NOW">
@@ -10,86 +18,28 @@ import Layout from '../layouts/Layout.astro';
           What I'm Doing Now?
         </h1>
         <p class="text-gray-400 text-lg">
-          Last updated: May 5, 2025
+          Last updated: {latest.match(/# (.+)/)?.[1] ?? 'Recently'}
         </p>
       </div>
 
-      <div class="space-y-12">
+      <section class="mb-12">
+        <div class="prose prose-invert max-w-none">
+          <Fragment set:html={marked.parse(latest)} />
+        </div>
+      </section>
 
-
-        <!--------- Current Projects -------------------->
-      
+      {archive.length > 0 && (
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4 flex items-center">
-            <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-            Current Projects
-          </h2>
-          <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/70 hover:scale-[1.02] hover:shadow-lg hover:shadow-green-500/10">
-            <ul class="space-y-4">
-              <li class="flex items-start group">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-white group-hover:text-green-400 transition-colors">Personal Website</h3>
-                  <p class="text-gray-400 mt-1 group-hover:text-gray-300 transition-colors">Building and improving my personal website with Astro and UnoCSS</p>
-                </div>
-              </li>
-            </ul>
+          <h2 class="text-2xl font-bold text-white mb-6 mt-10">Archive</h2>
+          <div class="space-y-10">
+            {archive.map(entry => (
+              <div class="prose prose-invert max-w-none border-l border-gray-700 pl-4">
+                <Fragment set:html={marked.parse(entry)} />
+              </div>
+            ))}
           </div>
         </section>
-
-        <!------------------ Learning -------------------------------->
-        <section>
-          <h2 class="text-2xl font-bold text-white mb-4 flex items-center">
-            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-            Learning
-          </h2>
-          <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/70 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/10">
-            <ul class="space-y-4">
-              <li class="flex items-start group">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">Advanced Video Editing</h3>
-                  <p class="text-gray-400 mt-1 group-hover:text-gray-300 transition-colors">Exploring new techniques in After Effects and Premiere Pro</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <!----------------- Upcoming --------------------------------->
-        <section>
-          <h2 class="text-2xl font-bold text-white mb-4 flex items-center">
-            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-            Upcoming
-          </h2>
-          <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/70 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/10">
-            <ul class="space-y-4">
-              <li class="flex items-start group">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">New Video Projects</h3>
-                  <p class="text-gray-400 mt-1 group-hover:text-gray-300 transition-colors">Planning new video content for social media</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <!-------------------- Reading ---------------------------------------->
-        <section>
-          <h2 class="text-2xl font-bold text-white mb-4 flex items-center">
-            <span class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
-            Reading
-          </h2>
-          <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/70 hover:scale-[1.02] hover:shadow-lg hover:shadow-yellow-500/10">
-            <ul class="space-y-4">
-              <li class="flex items-start group">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-white group-hover:text-yellow-400 transition-colors">The Art of War</h3>
-                  <p class="text-gray-400 mt-1 group-hover:text-gray-300 transition-colors">By Sun Tzu</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </div>
+      )}
 
       <div class="mt-12 text-center">
         <p class="text-gray-400">
