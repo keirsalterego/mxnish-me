@@ -1,6 +1,6 @@
 ---
 title: "Unlocking the Power of Zero-Sized Types in Rust: A Guide to State Machines"
-tags: ["Rust", "Programming", "State Machines", "Zero-Sized Types"]
+tags: ["Rust", "Zero-Sized Types"]
 
 ---
 

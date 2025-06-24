@@ -1,6 +1,6 @@
 ---
 title: My New Homepage lol
-tags: ["UnoCSS", "research", "homepage", "Jekyll"]
+tags: ["UnoCSS", "research", "homepage"]
 ---
 
 It seems that I always spend a lot of time on building my homepage.
