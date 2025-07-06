@@ -6,7 +6,7 @@ avatarBack: /img/avatar.jpg
 tltr: I do post production work by day and build things for the web by night.
 socials:
   - icon: i-academicons:cv
-    link: /files/cv/en.pdf
+    link: /files/cv/cv.pdf
   - icon: "i-ion:mail-outline"
     link: "mailto:mxnish@outlook.in"
   - icon: i-eva:github-outline
