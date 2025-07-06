@@ -3,7 +3,7 @@ name: Manish Kumar Jha
 subname: mnemosyne
 avatarFront: /img/me.jpg
 avatarBack: /img/avatar.jpg
-tltr: I do post production work by day and build things for the web by night.
+tltr: Turning ideas into web experiences, one project at a time.
 socials:
   - icon: i-academicons:cv
     link: /files/cv/cv.pdf
@@ -27,9 +27,9 @@ By the way, take a look at [some things](/projects) I've built as a web develope
 
 I’m a B.Tech student in [Computer Science and Engineering](https://silicon.ac.in/bbsr-home/b-tech-computer-science-engineering/) at [Silicon University](https://silicon.ac.in/), where I’m exploring the future of the web-one block at a time. My current passion? Building the next wave of decentralized applications and diving deep into the world of Web3.
 
-When I’m not decoding smart contracts or tinkering with blockchain tech, you’ll find me crafting sleek, user-friendly web projects. I also work as a professional video editor, producing polished [content](/production) for clients who want their stories to stand out.
+When I’m not decoding smart contracts or tinkering with blockchain tech, you’ll find me crafting sleek, user-friendly web projects. My main focus is on web development—designing and building modern, performant, and accessible websites and apps that make a difference.
 
- Curious about what I’ve built? Check out [some things](/projects) I’ve launched as a web developer.
+Curious about what I’ve built? Check out [some things](/projects) I’ve launched as a web developer.
 
 Always learning, always building-on-chain and beyond.
 
