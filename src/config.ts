@@ -7,14 +7,14 @@ export const SITE = {
 
 export const THEME = {
   editLink: {
-    pattern: "https://github.com/manishyoudumb/mxnish-me/edit/main/src/content/blog/:path",
+    pattern: "https://github.com/keirsalterego/mxnish-me/edit/main/src/content/blog/:path",
     text: "Edit this page on GitHub"
   },
   lastUpdatedText: "Last updated: "
 };
 
 export const GISCUS = {
-  repo: "manishyoudumb/mxnish-me",
+  repo: "keirsalterego/mxnish-me",
   repoId: "R_kgDOJqXxXw",
   category: "Comments",
   categoryId: "DIC_kwDOJqXxX84CXqXx",
