@@ -21,6 +21,3 @@ export const GISCUS = {
   light: "light",
   dark: "dark"
 };
-
-
-
