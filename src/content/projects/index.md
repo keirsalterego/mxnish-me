@@ -48,6 +48,13 @@ projects:
         - i-logos:vitejs
       repo: manishyoudumb/IRCTC
   RUST:
+    - name: DedCore
+      link: https://dedcore.live
+      desc: A high-performance file deduplication tool with TUI, featuring multi-algorithm hashing and smart filtering.
+      icon: i-heroicons-solid:duplicate
+      tech:
+        - i-logos:rust
+      repo: keirsalterego/dedcore
     - name: RustyTasks
       link: https://github.com/manishyoudumb/rustytasks
       desc: Conquer your tasks with ruthless efficiency using this command-line powerhouse.
@@ -86,5 +93,4 @@ projects:
         - i-logos:python
         - i-logos:md
 ---
-
 I'm trying to find a balance between building stuff and engineering.
