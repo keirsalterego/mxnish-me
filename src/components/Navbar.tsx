@@ -40,6 +40,13 @@ export const Navbar: Component<{
           Log
         </a>
         <a
+          class={`nav-btn${props.activePage === "notion" ? " nav-btn-active" : ""}`}
+          href="/notion"
+          title="Notion Workspace"
+        >
+          <span i-ri:notion-fill />
+        </a>
+        <a
           class={`nav-btn${props.activePage === "search" ? " nav-btn-active" : ""}`}
           href="/search"
         >
