@@ -1,6 +1,6 @@
 ---
 name: Manish Kumar Jha
-subname: mnemosyne
+subname: keirsalterego
 avatarFront: /img/me.jpg
 avatarBack: /img/avatar.jpg
 tltr: Turning ideas into web experiences, one project at a time.
@@ -35,7 +35,7 @@ Always learning, always building-on-chain and beyond.
 
 ## Miscellaneous
 
--  _mnemosyne_ is a greek word means _remembrance_
+-  _keirsalterego_ is a greek word means _remembrance_
 
 -  My dream: `while(sleeping){money++;}`
 
