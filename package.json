@@ -6,7 +6,9 @@
     "dev": "astro dev --host",
     "build": "astro build",
     "serve": "astro preview --host",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "sync-journal": "node scripts/sync-journal.js",
+    "watch-journal": "node scripts/watch-journal.js"
   },
   "prettier": "@renovamen/prettier-config",
   "devDependencies": {
@@ -37,7 +39,7 @@
     "solidjs-use": "^2.3.0",
     "taze": "^19.0.4",
     "typescript": "^5.8.3",
-    "unocss": "^66.0.0"
+    "unocss": "66.4.2"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -47,9 +49,11 @@
     }
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@notionhq/client": "^4.0.2",
     "@vercel/analytics": "^1.5.0",
-    "marked": "^15.0.12",
+    "chokidar": "4.0.3",
+    "marked": "16.2.0",
     "notion-api": "^0.1.0"
   }
 }

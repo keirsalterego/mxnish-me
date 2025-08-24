@@ -12,8 +12,5 @@ export default defineConfig({
     remarkPlugins,
     rehypePlugins,
     syntaxHighlight: false
-  },
-  content: {
-    collections: ['now', 'production']
   }
 });

@@ -1,0 +1,42 @@
+name: Sync Obsidian Journal
+
+on:
+  push:
+    paths:
+      - 'obsidian/journal/**'
+  workflow_dispatch:
+
+jobs:
+  sync-journal:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Sync journal
+        run: pnpm sync-journal
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          
+          # Check if there are changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            git add src/content/journal/
+            git commit -m "chore: update journal entries [skip ci]"
+            git push
+          fi
