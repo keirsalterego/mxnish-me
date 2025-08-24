@@ -1,13 +1,13 @@
 ---
-import { getJournalEntries } from '../../utils/journal';
-import Layout from '../../layouts/Journal.astro';
-import { marked } from 'marked';
+import { getJournalEntries } from "../../utils/journal";
+import Layout from "../../layouts/Journal.astro";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
   const journalEntries = await getJournalEntries();
-  return journalEntries.map(entry => ({
+  return journalEntries.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: { entry }
   }));
 }
 
@@ -15,6 +15,8 @@ const { entry } = Astro.props;
 const htmlContent = marked(entry.content);
 ---
 
-<Layout frontmatter={{ title: entry.title, date: entry.date, description: entry.description }}>
+<Layout
+  frontmatter={{ title: entry.title, date: entry.date, description: entry.description }}
+>
   <div set:html={htmlContent} />
 </Layout>

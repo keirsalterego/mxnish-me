@@ -3,7 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer.astro";
 import { SITE } from "@config";
-import Analytics from '@vercel/analytics/astro';
+import Analytics from "@vercel/analytics/astro";
 
 import "katex/dist/katex.min.css";
 import "@styles/main.css";
@@ -89,9 +89,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WWLS0F40RT"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WWLS0F40RT');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-WWLS0F40RT");
     </script>
   </head>
 

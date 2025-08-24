@@ -7,7 +7,8 @@ export const SITE = {
 
 export const THEME = {
   editLink: {
-    pattern: "https://github.com/keirsalterego/mxnish-me/edit/main/src/content/blog/:path",
+    pattern:
+      "https://github.com/keirsalterego/mxnish-me/edit/main/src/content/blog/:path",
     text: "Edit this page on GitHub"
   },
   lastUpdatedText: "Last updated: "

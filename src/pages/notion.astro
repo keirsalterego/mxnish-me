@@ -5,28 +5,36 @@ import Layout from "@layouts/Layout.astro";
 const NOTION_URL = "https://mxnish.notion.site";
 ---
 
-<Layout 
-  title={`Notion - ${SITE.title}`} 
+<Layout
+  title={`Notion - ${SITE.title}`}
   description="My Notion workspace with articles, notes, and more"
   activePage="notion"
   class="min-h-screen flex flex-col"
 >
   <main class="flex-grow flex items-center justify-center p-4">
     <div class="text-center">
-      <a 
+      <a
         href={NOTION_URL}
         target="_blank"
         rel="noopener noreferrer"
         class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-medium border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 transform hover:scale-[1.02] active:scale-95 text-gray-800 dark:text-gray-200 overflow-hidden"
       >
-        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        <span
+          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        ></span>
         <span class="i-ri-notion-fill text-2xl"></span>
         <span class="relative z-10">hi@mxnish_</span>
-        <span class="absolute -right-1 -bottom-1 w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-500 group-hover:bg-gray-600 dark:group-hover:bg-gray-400 transition-colors duration-300"></span>
+        <span
+          class="absolute -right-1 -bottom-1 w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-500 group-hover:bg-gray-600 dark:group-hover:bg-gray-400 transition-colors duration-300"
+        ></span>
       </a>
-      <div class="mt-6 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-400 leading-relaxed space-y-4">
-        <p>Welcome to my digital workspace. Here you'll find an organized collection of:</p>
-        
+      <div
+        class="mt-6 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-400 leading-relaxed space-y-4"
+      >
+        <p>
+          Welcome to my digital workspace. Here you'll find an organized collection of:
+        </p>
+
         <div class="grid md:grid-cols-2 gap-4 text-left">
           <div class="space-y-2">
             <h3 class="font-medium text-gray-700 dark:text-gray-300">Knowledge Base</h3>
@@ -37,7 +45,7 @@ const NOTION_URL = "https://mxnish.notion.site";
               <li>Cheatsheets and snippets</li>
             </ul>
           </div>
-          
+
           <div class="space-y-2">
             <h3 class="font-medium text-gray-700 dark:text-gray-300">Projects</h3>
             <ul class="space-y-1 list-disc list-inside">
@@ -47,7 +55,7 @@ const NOTION_URL = "https://mxnish.notion.site";
               <li>Progress tracking</li>
             </ul>
           </div>
-          
+
           <div class="space-y-2">
             <h3 class="font-medium text-gray-700 dark:text-gray-300">Learning</h3>
             <ul class="space-y-1 list-disc list-inside">
@@ -57,7 +65,7 @@ const NOTION_URL = "https://mxnish.notion.site";
               <li>Learning paths</li>
             </ul>
           </div>
-          
+
           <div class="space-y-2">
             <h3 class="font-medium text-gray-700 dark:text-gray-300">Personal</h3>
             <ul class="space-y-1 list-disc list-inside">
@@ -68,8 +76,10 @@ const NOTION_URL = "https://mxnish.notion.site";
             </ul>
           </div>
         </div>
-        
-        <p class="pt-2 text-xs text-gray-400 italic">This is a living document that evolves with my work and learning journey.</p>
+
+        <p class="pt-2 text-xs text-gray-400 italic">
+          This is a living document that evolves with my work and learning journey.
+        </p>
       </div>
     </div>
   </main>

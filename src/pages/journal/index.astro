@@ -1,26 +1,29 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getJournalEntries } from '../../utils/journal';
+import Layout from "../../layouts/Layout.astro";
+import { getJournalEntries } from "../../utils/journal";
 
 // Get all journal entries sorted by date
 const journalEntries = await getJournalEntries();
-console.log('Journal entries found:', journalEntries.length);
-console.log('Entries:', journalEntries.map(e => ({ slug: e.slug, title: e.title })));
+console.log("Journal entries found:", journalEntries.length);
+console.log(
+  "Entries:",
+  journalEntries.map((e) => ({ slug: e.slug, title: e.title }))
+);
 ---
 
 <style>
   .journal-link {
     text-decoration: none !important;
   }
-  
+
   .journal-link:hover {
     text-decoration: none !important;
   }
-  
+
   .journal-link h2 {
     transition: opacity 0.2s ease;
   }
-  
+
   .journal-link:hover h2 {
     opacity: 0.7;
   }
@@ -29,36 +32,46 @@ console.log('Entries:', journalEntries.map(e => ({ slug: e.slug, title: e.title 
 <Layout title="Journal">
   <div class="max-w-4xl mx-auto p-6">
     <h1 class="text-4xl font-bold mb-6 text-center">The Daily Laws</h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400 mb-2 text-center max-w-3xl mx-auto">Chronicles of Power, Strategy, and Human Nature</p>
-    <div class="max-w-2xl mx-auto mb-8 border-t border-b border-gray-200 dark:border-gray-700 py-4">
+    <p
+      class="text-xl text-gray-600 dark:text-gray-400 mb-2 text-center max-w-3xl mx-auto"
+    >
+      Chronicles of Power, Strategy, and Human Nature
+    </p>
+    <div
+      class="max-w-2xl mx-auto mb-8 border-t border-b border-gray-200 dark:border-gray-700 py-4"
+    >
       <p class="text-center text-gray-600 dark:text-gray-400 italic">
-        "The future belongs to those who learn more skills and combine them in creative ways."
-        <span class="block mt-2 text-sm">— Robert Greene, <span class="not-italic">Mastery</span></span>
+        "The future belongs to those who learn more skills and combine them in creative
+        ways."
+        <span class="block mt-2 text-sm"
+          >— Robert Greene, <span class="not-italic">Mastery</span></span
+        >
       </p>
     </div>
-    
-    {journalEntries.length > 0 ? (
-      <ul class="space-y-4">
-        {journalEntries.map(entry => (
-          <li class="border-b border-gray-100 dark:border-gray-800 pb-4">
-            <a 
-              href={`/journal/${entry.slug}`}
-              class="journal-link block py-3 px-4"
-            >
-              <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">{entry.title}</h2>
-              <time class="text-gray-500 dark:text-gray-500 text-sm">
-                {entry.date.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-            </a>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p class="text-gray-600 dark:text-gray-400">No journal entries found.</p>
-    )}
+
+    {
+      journalEntries.length > 0 ? (
+        <ul class="space-y-4">
+          {journalEntries.map((entry) => (
+            <li class="border-b border-gray-100 dark:border-gray-800 pb-4">
+              <a href={`/journal/${entry.slug}`} class="journal-link block py-3 px-4">
+                <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                  {entry.title}
+                </h2>
+                <time class="text-gray-500 dark:text-gray-500 text-sm">
+                  {entry.date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                  })}
+                </time>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-gray-600 dark:text-gray-400">No journal entries found.</p>
+      )
+    }
   </div>
 </Layout>

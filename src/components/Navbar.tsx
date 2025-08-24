@@ -9,11 +9,14 @@ export const Navbar: Component<{
   return (
     <header
       class="z-50 fixed left-1/2 top-4 -translate-x-1/2 w-auto min-w-fit max-w-xl h-11 flex items-center justify-center bg-bg/95 dark:bg-bg-dark/95 border border-white/10 dark:border-black/20 shadow-md rounded-lg font-ui px-2 md:px-4"
-      style="transition: box-shadow 0.2s, background 0.2s;"
+      style={{ transition: "box-shadow 0.2s, background 0.2s" }}
     >
       {/* Left: Logo */}
       <div class="flex items-center min-w-0">
-        <a class="font-semibold text-fg-light hover:text-fg-dark text-base tracking-tight flex items-center gap-1" href="/">
+        <a
+          class="font-semibold text-fg-light hover:text-fg-dark text-base tracking-tight flex items-center gap-1"
+          href="/"
+        >
           hi@mxnish
           <span class="blink">_</span>
         </a>
