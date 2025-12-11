@@ -2,14 +2,10 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 export const getPostDate = (id: string) => id.split("/").pop()!.substring(0, 10);
 
-export const getPosts = async (lang?: string) => {
+export const getPosts = async () => {
   const posts = await getCollection("blog");
 
-  return posts.filter(({ id, data }) => {
-    const isLangMatch =
-      lang === "zh" ? id.startsWith("zh/") : lang ? !id.startsWith("zh/") : true;
-    return isLangMatch && !data.draft;
-  });
+  return posts.filter(({ data }) => !data.draft);
 };
 
 export const getSortedPosts = (posts: CollectionEntry<"blog">[]) =>

@@ -73,8 +73,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       pnpm:
-        specifier: ^10.11.0
-        version: 10.11.0
+        specifier: ^10.25.0
+        version: 10.25.0
       rehype-autolink-headings:
         specifier: ^7.1.0
         version: 7.1.0
@@ -2652,8 +2652,8 @@ packages:
   pnpm-workspace-yaml@0.3.1:
     resolution: {integrity: sha512-3nW5RLmREmZ8Pm8MbPsO2RM+99RRjYd25ynj3NV0cFsN7CcEl4sDFzgoFmSyduFwxFQ2Qbu3y2UdCh6HlyUOeA==}
 
-  pnpm@10.11.0:
-    resolution: {integrity: sha512-ZUBYP0HMX2KOs9l3Ps7oAvT575kjzEW2mJD7R5kdSwkpZGlOw6T3OKQgyRijMwYsi5JdMS9C5PDCY+tgNVH5dw==}
+  pnpm@10.25.0:
+    resolution: {integrity: sha512-XoJjkCevN8+DIGG8xtY5whljRIjg8rrr54UCink957Ul/80/f/V09emGBlTgmP6FK6isXdXO/hdn0joCCpL1AQ==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -6803,7 +6803,7 @@ snapshots:
     dependencies:
       yaml: 2.7.1
 
-  pnpm@10.11.0: {}
+  pnpm@10.25.0: {}
 
   possible-typed-array-names@1.1.0: {}
 

@@ -15,8 +15,8 @@ This directory contains your Obsidian vault for journaling. Any markdown files y
    - Write your journal entries in markdown format
 
 3. **Sync with Portfolio**
-   - Run `pnpm sync-journal` to sync your journal entries with your portfolio
-   - Your journal will be available at `/journal` on your website
+   - Run `pnpm sync-journal` to format, mirror, commit, and push your journal entries
+   - Your journal will be available at `/journal` on your website once the push finishes
 
 ## Tips
 - Use markdown for formatting

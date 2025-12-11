@@ -3,40 +3,37 @@ name: Manish Kumar Jha
 subname: keirsalterego
 avatarFront: /img/me.jpg
 avatarBack: /img/avatar.jpg
-tltr: Turning ideas into web experiences, one project at a time.
+tltr: Engineering high-performance protocols and decentralized infrastructure.
 socials:
   - icon: i-academicons:cv
     link: /files/cv/cv.pdf
   - icon: "i-ion:mail-outline"
-    link: "mailto:mxnish@outlook.in"
+    link: "mailto:keirsalterego@gmail.com"
   - icon: i-eva:github-outline
-    link: https://github.com/manishyoudumb
+    link: https://github.com/keirsalterego
   - icon: i-radix-icons:linkedin-logo
     link: https://www.linkedin.com/in/mxnish
   - icon: i-carbon:logo-x
-    link: https://www.twitter.com/manishyoudumb
+    link: https://www.twitter.com/keirsalterego
 
 ---
 
-
 ## Bio
 
-<!-- I am a B.Tech student in the [Computer Science and Engineering](https://silicon.ac.in/bbsr-home/b-tech-computer-science-engineering/) department at [Silicon University](https://silicon.ac.in/). My current interest leans in WEB3 development.
+I’m a B.Tech student in [Computer Science and Engineering](https://silicon.ac.in/bbsr-home/b-tech-computer-science-engineering/) at [Silicon University](https://silicon.ac.in/), moving beyond the application layer to engineer the machinery that powers the decentralized web.
 
-By the way, take a look at [some things](/projects) I've built as a web developer. -->
+While most developers focus on writing smart contracts, I focus on what runs them. My passion lies in **Core Protocol Engineering** and **Systems Programming** using **Rust**. I am currently researching the **Solana Runtime (SVM)**, validator architecture, and high-performance network infrastructure.
 
-I’m a B.Tech student in [Computer Science and Engineering](https://silicon.ac.in/bbsr-home/b-tech-computer-science-engineering/) at [Silicon University](https://silicon.ac.in/), where I’m exploring the future of the web-one block at a time. My current passion? Building the next wave of decentralized applications and diving deep into the world of Web3.
+Instead of building UI/UX, I am obsessed with low-level optimizations, memory safety, and the consensus mechanisms that make blockchains scalable. My goal is to work on the "metal" of Web3—contributing to open-source validator clients and optimizing transaction processing at the system level.
 
-When I’m not decoding smart contracts or tinkering with blockchain tech, you’ll find me crafting sleek, user-friendly web projects. My main focus is on web development—designing and building modern, performant, and accessible websites and apps that make a difference.
+Check out my [repositories](/projects) where I explore systems-level challenges and Rust performance.
 
-Curious about what I’ve built? Check out [some things](/projects) I’ve launched as a web developer.
-
-Always learning, always building-on-chain and beyond.
+Always compiling, always optimizing.
 
 ## Miscellaneous
 
--  _keirsalterego_ is a greek word means _remembrance_
+-  _keirsalterego_ is a fusion of Gaelic and Latin meaning _the dark Citadel of my second self_
 
 -  My dream: `while(sleeping){money++;}`
 
--  Currently interested in *No Man's Sky* and *Minecraft*
+-  Currently grinding _CS2_

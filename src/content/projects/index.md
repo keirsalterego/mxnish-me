@@ -10,7 +10,7 @@ projects:
         - i-logos:typescript-icon
         - i-logos:unocss
         - i-logos:vitejs
-      repo: manishyoudumb/play-macos
+      repo: keirsalterego/play-macos
     - name: WaveX
       link: https://wavex.mxnish.me
       desc: A web-based, local-first platform for meetings with screen sharing, recording, and chat.
@@ -20,7 +20,7 @@ projects:
         - i-logos:typescript-icon
         - i-logos:unocss
         - i-simple-icons:pwa
-      repo: manishyoudumb/wavex
+      repo: keirsalterego/wavex
     - name: Cube Solver
       link: https://cubejs.mxnish.me
       desc: A solver for Rubik's Cube
@@ -29,7 +29,7 @@ projects:
         - i-logos:javascript
         - i-vscode-icons:file-type-html
         - i-vscode-icons:file-type-css
-      repo: manishyoudumb/cube.js
+      repo: keirsalterego/cube.js
     - name: Deckflare
       link: https://www.deckflare.vercel.app
       desc: A results-driven, full-service marketing agency helping brands grow and connect with their audience.
@@ -37,7 +37,7 @@ projects:
       tech:
         - i-logos:nextjs-icon
         - i-logos:ant-design
-      repo: manishyoudumb/Deckflare
+      repo: keirsalterego/Deckflare
     - name: IRCTC (Redesign)
       desc: Still in development.
       icon: i-icon-park-outline:game-ps
@@ -46,7 +46,7 @@ projects:
         - i-logos:typescript-icon
         - i-logos:tailwindcss-icon
         - i-logos:vitejs
-      repo: manishyoudumb/IRCTC
+      repo: keirsalterego/IRCTC
   RUST:
     - name: DedCore
       link: https://dedcore.live
@@ -56,20 +56,20 @@ projects:
         - i-logos:rust
       repo: keirsalterego/dedcore
     - name: RustyTasks
-      link: https://github.com/manishyoudumb/rustytasks
+      link: https://github.com/keirsalterego/rustytasks
       desc: Conquer your tasks with ruthless efficiency using this command-line powerhouse.
       icon: i-heroicons-solid:fire
       tech:
         - i-logos:rust
         - i-logos:mongodb
     - name: RustyKeir
-      link: https://github.com/manishyoudumb/rustykeir
+      link: https://github.com/keirsalterego/rustykeir
       desc: Keir Lang, Because 9000 programming languages just weren't enough.
       tech:
         - i-logos:rust
       icon: i-ph:microphone-bold
     - name: Super Manager
-      link: https://github.com/manishyoudumb/super-manager
+      link: https://github.com/keirsalterego/super-manager
       desc: A lightning fast File Manager. (development)
       icon: i-iconoir:grid-remove
       tech:
@@ -77,7 +77,7 @@ projects:
         - i-logos:vitejs
         - i-logos:tailwindcss-icon
     - name: FireFox
-      link: https://github.com/manishyoudumb/FireFox
+      link: https://github.com/keirsalterego/FireFox
       desc: A browser made with rust (development)
       icon: i-icon-park-outline:game-ps
       tech:
@@ -86,7 +86,7 @@ projects:
         - i-logos:tailwindcss-icon
   PYTHON:
     - name: Maya
-      link: https://github.com/manishyoudumb/play-maya
+      link: https://github.com/keirsalterego/play-maya
       desc: That one minimalist LLM assistant I'd love to have at my place!
       icon: oh-my-cv
       tech:

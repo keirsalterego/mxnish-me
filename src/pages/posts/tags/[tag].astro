@@ -10,7 +10,7 @@ export interface Props {
 const { tag } = Astro.props;
 
 export const getStaticPaths = async () => {
-  const posts = await getPosts("en");
+  const posts = await getPosts();
   const { tags } = getTags(posts);
 
   return tags.map((tag) => ({
@@ -20,4 +20,4 @@ export const getStaticPaths = async () => {
 };
 ---
 
-<PostList lang="en" tag={tag} />
+<PostList tag={tag} />

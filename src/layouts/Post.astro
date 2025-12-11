@@ -16,20 +16,19 @@ import {
 
 export interface Props {
   post: CollectionEntry<"blog">;
-  lang: string;
 }
 
-const { post, lang } = Astro.props;
+const { post } = Astro.props;
 const { title, author, tags } = post.data;
 
 const { Content } = await render(post);
-const tagURL = `/posts/${lang === "en" ? "" : lang + "/"}tags/`;
+const tagURL = "/posts/tags/";
 
 // does this post has table of contents enabled?
 const hasToc = /## toc\n/.test(post.body ?? "");
 
 // previous and next post
-const posts = getSortedPosts(await getPosts(lang));
+const posts = getSortedPosts(await getPosts());
 const postIndex = posts.findIndex((p) => p.id === post.id);
 
 const nextPost =

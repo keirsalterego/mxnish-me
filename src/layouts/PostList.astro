@@ -2,7 +2,6 @@
 import { slugify } from "@renovamen/utils";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
-import ToggleLang from "@components/ToggleLang.astro";
 import {
   getPostDate,
   getPosts,
@@ -13,23 +12,22 @@ import {
 } from "@utils";
 
 export interface Props {
-  lang: string;
   tag?: string;
 }
 
-const { lang, tag } = Astro.props;
+const { tag } = Astro.props;
 
-const title = lang === "en" ? "Articles" : "博客";
-const allURL = `/posts/${lang === "en" ? "" : lang + "/"}`;
+const title = "Articles";
+const allURL = "/posts/";
 const tagURL = `${allURL}tags/`;
 
-const posts = await getPosts(lang);
+const posts = await getPosts();
 const { tags, numPostsPerTag } = getTags(posts);
 const sortedPostsByYear = getSortedPostsByYear(tag ? getPostsByTag(posts, tag) : posts);
 ---
 
 <Layout title={`${title} - ${SITE.title}`} activePage={"posts"}>
-  <h1>{title} <ToggleLang /></h1>
+  <h1>{title}</h1>
 
   <!-- tag list -->
   <span class="mr-1.5 -space-x-0.5 text-fg-light">

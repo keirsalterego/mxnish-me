@@ -1,13 +1,14 @@
 # Journal Automation Setup
 
-Your Obsidian journal entries are now automatically synced to your portfolio website at mxnish.me. Here's how the system works and how to use it.
+Your Obsidian journal entries are automatically synced, committed, and pushed to your portfolio website at mxnish.me. Here's how the system works and how to use it.
 
 ## How It Works
 
 1. **Write** journal entries in `obsidian/journal/yyyy-mm-dd.md`
 2. **Automatic Sync** copies files to `src/content/journal/`
-3. **Git Integration** commits and pushes changes automatically
-4. **Live Website** updates on your portfolio
+3. **Frontmatter Guard** auto-adds YAML if missing
+4. **Git Integration** commits and pushes changes automatically
+5. **Live Website** updates on your portfolio
 
 ## File Structure
 
@@ -23,10 +24,15 @@ src/content/journal/        # Astro content collection
 
 ## Usage Options
 
-### Option 1: Manual Sync
+### Option 1: Manual Sync (one-shot)
 ```bash
 pnpm sync-journal
 ```
+
+This will:
+- Normalize frontmatter for each Obsidian entry
+- Mirror files into `src/content/journal/` (stale files are removed)
+- Commit and push changes to origin
 
 ### Option 2: Automatic File Watching (Recommended)
 ```bash
@@ -35,10 +41,54 @@ pnpm watch-journal
 
 This will:
 - 🔍 Watch for changes in `obsidian/journal/`
-- 🔄 Automatically sync files
+- ⏳ Wait until there has been no change for ~30 minutes, then run the sync once
+- 🔄 Automatically run the same sync flow as above (frontmatter, mirror, prune)
 - 💾 Commit changes to Git
 - 🚀 Push to remote repository
 - ✅ Deploy to your website
+
+### After a reset: quick setup
+
+1. Install dependencies once: `pnpm install`
+2. Seed the repo with your latest notes: `pnpm sync-journal`
+3. For continuous sync while writing: `pnpm watch-journal` (leave it running in a terminal)
+4. Verify on the site after the push completes
+
+### Auto-start watcher on login (Linux systemd user service)
+
+1) Create a user service file:
+
+`~/.config/systemd/user/watch-journal.service`
+```ini
+[Unit]
+Description=Watch Obsidian journal and sync after inactivity
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/keirsalterego/mxnish-me
+ExecStart=/usr/bin/env pnpm watch-journal
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+```
+
+2) Enable and start it:
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now watch-journal.service
+```
+
+3) Check logs if needed:
+```bash
+journalctl --user -u watch-journal.service -f
+```
+
+Notes:
+- Make sure `pnpm` is on your PATH for the user session (the `env` shebang will pick it up).
+- The watcher waits for ~30 minutes of no edits before syncing/committing/pushing.
 
 ## Journal Entry Format
 
