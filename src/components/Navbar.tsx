@@ -48,12 +48,6 @@ export const Navbar: Component<{
         >
           Journal
         </a>
-        <a
-          class={`nav-btn${props.activePage === "search" ? " nav-btn-active" : ""}`}
-          href="/search"
-        >
-          <span i-uil:search />
-        </a>
       </nav>
 
       {/* Right: Toggles */}
@@ -65,10 +59,15 @@ export const Navbar: Component<{
 
       <style>{`
         header {
-          background: rgba(12, 13, 20, 0.92);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-          backdrop-filter: blur(10px);
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          backdrop-filter: none;
+          max-width: min(1100px, 92vw);
+        }
+        nav {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
         }
         .nav-btn {
           color: var(--fg-light);
@@ -77,6 +76,7 @@ export const Navbar: Component<{
           text-decoration: none;
           transition: background 0.15s, color 0.15s;
           font-weight: 500;
+          font-size: clamp(0.9rem, 1vw + 0.82rem, 1rem);
         }
         .nav-btn:hover {
           background: rgba(255, 255, 255, 0.08);
@@ -104,6 +104,36 @@ export const Navbar: Component<{
         @keyframes blink {
           to {
             visibility: hidden;
+          }
+        }
+
+        @media (max-width: 640px) {
+          header {
+            width: calc(100% - 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            padding-left: calc(0.4rem + env(safe-area-inset-left, 0px));
+            padding-right: calc(0.4rem + env(safe-area-inset-right, 0px));
+          }
+          nav {
+            gap: 0.35rem;
+          }
+          .nav-btn {
+            padding: 0.15rem 0.55rem;
+            font-size: 0.92rem;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          header {
+            max-width: 1100px;
+          }
+          nav {
+            gap: 0.75rem;
+          }
+          .nav-btn {
+            font-size: 1rem;
+            padding: 0.18rem 0.8rem;
           }
         }
       `}</style>

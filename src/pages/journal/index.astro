@@ -4,13 +4,25 @@ import { getJournalEntries } from "../../utils/journal";
 
 const journalEntries = await getJournalEntries();
 
-const groupedByYear = journalEntries.reduce((acc, entry) => {
-  const year = entry.date.getFullYear().toString();
-  (acc[year] ||= []).push(entry);
+const groupedByMonth = journalEntries.reduce((acc, entry) => {
+  const y = entry.date.getFullYear();
+  const m = entry.date.getMonth();
+  const key = `${y}-${m}`;
+  (acc[key] ||= []).push(entry);
   return acc;
 }, {} as Record<string, typeof journalEntries>);
 
-const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
+const monthOrder = (key: string) => {
+  const [y, m] = key.split("-").map(Number);
+  return y * 12 + m;
+};
+
+const monthLabels = (key: string) => {
+  const [y, m] = key.split("-").map(Number);
+  return `${new Date(y, m, 1).toLocaleString("en-US", { month: "short" })} ${y}`;
+};
+
+const monthKeys = Object.keys(groupedByMonth).sort((a, b) => monthOrder(b) - monthOrder(a));
 
 const formatDate = (date: Date) =>
   date.toLocaleDateString("en-US", {
@@ -42,12 +54,12 @@ const getExcerpt = (entry: (typeof journalEntries)[number]) => {
 
   <section class="posts-grid">
     {
-      years.length > 0 ? (
-        years.map((year) => (
+      monthKeys.length > 0 ? (
+        monthKeys.map((key) => (
           <div class="year-block">
-            <div class="year-label">{year}</div>
+            <div class="year-label">{monthLabels(key)}</div>
             <div class="year-list">
-              {groupedByYear[year].map((entry) => (
+              {groupedByMonth[key].map((entry) => (
                 <a class="journal-row" href={`/journal/${entry.slug}`}>
                   <div class="journal-row__date">{formatDate(entry.date)}</div>
                   <h3 class="journal-row__title">{entry.title}</h3>
@@ -94,14 +106,14 @@ const getExcerpt = (entry: (typeof journalEntries)[number]) => {
 
     .hero-aside {
       max-width: 22rem;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 16px;
       padding: 1rem 1.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
       background: #0d0f16;
       box-shadow:
-        inset 6px 6px 12px rgba(0, 0, 0, 0.45),
-        inset -6px -6px 12px rgba(255, 255, 255, 0.035);
-      backdrop-filter: none;
+        inset 7px 7px 14px rgba(0, 0, 0, 0.52),
+        inset -7px -7px 14px rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
       color: #e8ebf7;
     }
 
@@ -138,11 +150,11 @@ const getExcerpt = (entry: (typeof journalEntries)[number]) => {
     .year-list {
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(14, 16, 23, 0.7);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+      border: none;
+      border-radius: 0;
+      overflow: visible;
+      background: transparent;
+      box-shadow: none;
     }
 
     .journal-row {
@@ -150,10 +162,10 @@ const getExcerpt = (entry: (typeof journalEntries)[number]) => {
       grid-template-columns: 1fr 3fr auto;
       align-items: center;
       gap: 0.75rem;
-      padding: 0.85rem 1rem;
+      padding: 0.85rem 0.2rem;
       text-decoration: none;
       color: #ffffff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       transition: background 140ms ease, border-color 140ms ease, transform 120ms ease;
     }
 
@@ -162,7 +174,7 @@ const getExcerpt = (entry: (typeof journalEntries)[number]) => {
     }
 
     .journal-row:hover {
-      background: rgba(20, 22, 30, 0.9);
+      background: transparent;
       border-color: rgba(138, 165, 255, 0.18);
       transform: translateX(1px);
     }

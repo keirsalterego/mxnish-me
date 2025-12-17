@@ -40,23 +40,17 @@ const { frontmatter } = Astro.props;
 
   .journal-article__card {
     position: relative;
-    padding: 1.75rem;
+    padding: 1.7rem;
     border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(14, 16, 23, 0.92);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0a0c12;
+    box-shadow:
+      inset 8px 8px 16px rgba(0, 0, 0, 0.58),
+      inset -8px -8px 16px rgba(255, 255, 255, 0.05);
   }
 
   .journal-article__card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(135deg, rgba(79, 141, 255, 0.08), rgba(155, 92, 255, 0.05));
-    opacity: 0.7;
-    pointer-events: none;
+    content: none;
   }
 
   .journal-article__header,
@@ -66,7 +60,7 @@ const { frontmatter } = Astro.props;
   }
 
   .journal-article__header {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.1rem;
   }
 
   .eyebrow {
@@ -97,6 +91,11 @@ const { frontmatter } = Astro.props;
 
   .journal-article__body {
     color: #e8ebf7;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   :global(.journal-article__body a) {
