@@ -11,22 +11,195 @@ interface Frontmatter {
 
 const { projects } = frontmatter as Frontmatter;
 ---
-
 <Layout title={`Projects - ${SITE.title}`} activePage="projects">
-  <h1>Builds</h1>
+  <main class="projects-shell">
+    <section class="projects-hero">
+      <div>
+        <p class="eyebrow">/projects</p>
+        <h1>The Garage</h1><p class="lede">A wolf on a chase!</p>
+      </div>
+      <div class="hero-aside">
+        <p class="meta-label">Current focus</p>
+        <p class="meta-value">Rust, Solana, and fast web things</p>
+      </div>
+    </section>
 
-  <Content />
+    <section class="projects-note">
+      <Content />
+    </section>
 
-  {
-    Object.keys(projects).map((key) => (
-      <>
-        <h3>{key}</h3>
-        <div grid="~ cols-1 sm:cols-2 gap-2" py-2>
-          {projects[key].map((project) => (
-            <Project client:load project={project} />
-          ))}
-        </div>
-      </>
-    ))
-  }
+    <section class="projects-groups">
+      {
+        Object.keys(projects).map((key) => (
+          <article class="group-card">
+            <div class="group-header">
+              <div>
+                <p class="eyebrow">Collection</p>
+                <h3>{key}</h3>
+              </div>
+              <span class="pill pill-ghost">{projects[key].length} projects</span>
+            </div>
+            <div class="projects-grid">
+              {projects[key].map((project) => (
+                <Project client:load project={project} />
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .projects-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .projects-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: #8aa5ff;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .projects-hero h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .lede {
+    margin: 0.35rem 0 0;
+    color: #c5cbe3;
+    max-width: 48rem;
+  }
+
+  .hero-aside {
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: #0d0f16;
+    box-shadow:
+      inset 6px 6px 12px rgba(0, 0, 0, 0.45),
+      inset -6px -6px 12px rgba(255, 255, 255, 0.035);
+    backdrop-filter: none;
+    min-width: 220px;
+    max-width: 260px;
+  }
+
+  .meta-label {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #9da7c2;
+  }
+
+  .meta-value {
+    margin: 0.2rem 0 0;
+    font-weight: 700;
+    color: #e8ebf7;
+    font-size: 1.05rem;
+  }
+
+  .projects-note {
+    display: none;
+  }
+
+  .projects-note :global(p) {
+    color: #dfe3f3;
+    margin: 0;
+  }
+
+  .projects-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .group-card {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .group-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.32rem 0.65rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: #dfe3f3;
+    text-decoration: none;
+    font-size: 0.9rem;
+    background: #0d0f16;
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.35),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.025);
+  }
+
+  .pill-ghost {
+    border-color: rgba(255, 255, 255, 0.04);
+    background: #0d0f16;
+    color: #cfd6f4;
+    font-size: 0.86rem;
+    padding: 0.24rem 0.6rem;
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.35),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.025);
+  }
+
+  .projects-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    .projects-hero {
+      flex-direction: column;
+    }
+
+    .hero-aside {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .group-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

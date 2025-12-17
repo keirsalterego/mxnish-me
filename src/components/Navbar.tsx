@@ -1,5 +1,4 @@
 import { Show, type Component } from "solid-js";
-import ToggleDark from "@components/ToggleDark";
 import ToggleToc from "@components/ToggleToc";
 
 export const Navbar: Component<{
@@ -8,7 +7,7 @@ export const Navbar: Component<{
 }> = (props) => {
   return (
     <header
-      class="z-50 fixed left-1/2 top-4 -translate-x-1/2 w-auto min-w-fit max-w-xl h-11 flex items-center justify-center bg-bg/95 dark:bg-bg-dark/95 border border-white/10 dark:border-black/20 shadow-md rounded-lg font-ui px-2 md:px-4"
+      class="z-50 fixed left-1/2 top-4 -translate-x-1/2 w-auto min-w-fit max-w-xl h-11 flex items-center justify-center rounded-lg font-ui px-2 md:px-4"
       style={{ transition: "box-shadow 0.2s, background 0.2s" }}
     >
       {/* Left: Logo */}
@@ -59,13 +58,18 @@ export const Navbar: Component<{
 
       {/* Right: Toggles */}
       <div class="flex items-center min-w-0 gap-x-1 ml-1">
-        <ToggleDark />
         <Show when={props.hasToc}>
           <ToggleToc />
         </Show>
       </div>
 
       <style>{`
+        header {
+          background: rgba(12, 13, 20, 0.92);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(10px);
+        }
         .nav-btn {
           color: var(--fg-light);
           padding: 0.15rem 0.7rem;
@@ -75,22 +79,22 @@ export const Navbar: Component<{
           font-weight: 500;
         }
         .nav-btn:hover {
-          background: #f3f4f6;
-          color: var(--fg-dark);
+          background: rgba(255, 255, 255, 0.08);
+          color: #e8ecff;
         }
         .nav-btn-active {
-          background: #e5e7eb;
-          color: var(--fg-dark);
+          background: rgba(255, 255, 255, 0.12);
+          color: #ffffff;
           border-radius: 6px;
         }
         @media (prefers-color-scheme: dark) {
           .nav-btn:hover {
-            background: #23272e;
-            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            color: #e8ecff;
           }
           .nav-btn-active {
-            background: #23272e;
-            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
             border-radius: 6px;
           }
         }

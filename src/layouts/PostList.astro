@@ -6,7 +6,7 @@ import {
   getPostDate,
   getPosts,
   getPostsByTag,
-  getSortedPostsByYear,
+  getSortedPosts,
   getTags,
   formatDate
 } from "@utils";
@@ -22,53 +22,239 @@ const allURL = "/posts/";
 const tagURL = `${allURL}tags/`;
 
 const posts = await getPosts();
+const filteredPosts = tag ? getPostsByTag(posts, tag) : posts;
+const sortedPosts = getSortedPosts(filteredPosts);
 const { tags, numPostsPerTag } = getTags(posts);
-const sortedPostsByYear = getSortedPostsByYear(tag ? getPostsByTag(posts, tag) : posts);
+
+const groupedByYear = sortedPosts.reduce((acc, item) => {
+  const year = getPostDate(item.id).slice(0, 4);
+  (acc[year] ||= []).push(item);
+  return acc;
+}, {} as Record<string, typeof sortedPosts>);
+
+const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <Layout title={`${title} - ${SITE.title}`} activePage={"posts"}>
-  <h1>{title}</h1>
+  <section class="posts-hero">
+    <div>
+      <p class="eyebrow">/posts</p>
+      <h1>Notes from the build log.</h1>
+      
+    </div>
+    <div class="tag-pills">
+      <a href={allURL} class={`pill ${!tag ? "pill-active" : ""}`}>
+        <span class="i-uil:tag-alt" /> all
+        <sup>{numPostsPerTag["all"]}</sup>
+      </a>
+      {
+        tags.map((t) => (
+          <a href={tagURL + slugify(t)} class={`pill ${t === tag ? "pill-active" : ""}`}>
+            <span class="i-uil:tag-alt" /> {t}
+            <sup>{numPostsPerTag[t]}</sup>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 
-  <!-- tag list -->
-  <span class="mr-1.5 -space-x-0.5 text-fg-light">
-    <span class="i-uil:tag-alt size-4"></span>
-    <a href={allURL} class={`!nav-item ${!tag && "!nav-active"}`}>all</a>
-    <sup>{numPostsPerTag["all"]}</sup>
-  </span>
-
-  {
-    tags.map((t) => (
-      <span class="mr-1.5 -space-x-0.5 text-fg-light">
-        <span class="i-uil:tag-alt size-4" />
-        {/* eslint-disable-next-line format/prettier */}
-        <a href={tagURL + slugify(t)} class={`!nav-item ${t === tag && '!nav-active'}`}>{t}</a>
-        <sup>{numPostsPerTag[t]}</sup>
-      </span>
-    ))
-  }
-
-  <!-- blog list -->
-  {
-    Object.keys(sortedPostsByYear)
-      .sort((a, b) => b.localeCompare(a))
-      .map((year) => (
-        <div>
-          <h3>{year}</h3>
-          {sortedPostsByYear[year].map((item) => (
-            <div flex items-start m="y-1 x-0.5">
-              <div class="w-14 h-6 leading-6 mr-2" text="fg-light sm">
-                {formatDate(getPostDate(item.id), 1)}
-              </div>
-              <a
-                class="flex-1 !text-fg underline-offset-4"
-                href={`/posts/${item.id}`}
-                transition:name={item.id}
-              >
-                {item.data.title}
+  <section class="posts-grid">
+    {
+      years.map((year) => (
+        <div class="year-block">
+          <div class="year-label">{year}</div>
+          <div class="year-grid">
+            {groupedByYear[year].map((item) => (
+              <a class="post-card" href={`/posts/${item.id}`} transition:name={item.id}>
+                <div class="post-card__date">{formatDate(getPostDate(item.id), 0)}</div>
+                <h3 class="post-card__title">{item.data.title}</h3>
+                {
+                  item.data.tags && item.data.tags.length > 0 && (
+                    <div class="post-card__tags">
+                      {item.data.tags.map((t) => (
+                        <span class="pill pill-ghost">{t}</span>
+                      ))}
+                    </div>
+                  )
+                }
+                <div class="post-card__arrow" aria-hidden="true">→</div>
               </a>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))
-  }
+    }
+  </section>
+
+  <style>
+    .posts-hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      color: #8aa5ff;
+      margin: 0 0 0.2rem 0;
+    }
+
+    .lede {
+      color: #c5cbe3;
+      margin: 0.2rem 0 0;
+      max-width: 38rem;
+    }
+
+    .tag-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.32rem 0.78rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #dfe3f3;
+      text-decoration: none;
+      font-size: 0.9rem;
+      background: #0b0d13;
+      box-shadow:
+        inset 4px 4px 8px rgba(0, 0, 0, 0.48),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+      transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+    }
+
+    .pill:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: #0c0f16;
+      box-shadow:
+        inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+        inset -5px -5px 10px rgba(255, 255, 255, 0.06);
+    }
+
+    .pill-active {
+      border-color: rgba(138, 165, 255, 0.5);
+      background: radial-gradient(circle at 20% 20%, rgba(138, 165, 255, 0.15), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(102, 255, 214, 0.12), transparent 55%),
+        #0b0d13;
+    }
+
+    .pill sup {
+      color: #9da7c2;
+    }
+
+    .pill-ghost {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: #0b0d13;
+      color: #cfd6f4;
+      font-size: 0.82rem;
+      padding: 0.2rem 0.6rem;
+      box-shadow:
+        inset 3px 3px 7px rgba(0, 0, 0, 0.45),
+        inset -3px -3px 7px rgba(255, 255, 255, 0.04);
+    }
+
+    .posts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .year-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .year-label {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #a8b5ff;
+    }
+
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .post-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 0.75rem;
+      row-gap: 0.3rem;
+      padding: 1rem 1.05rem;
+      color: #e8ebf7;
+      text-decoration: none;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #0a0c12;
+      box-shadow:
+        inset 7px 7px 14px rgba(0, 0, 0, 0.55),
+        inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+      transition: color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    .post-card::before {
+      content: none;
+    }
+
+    .post-card:hover {
+      color: #e8ebf7;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow:
+        inset 8px 8px 16px rgba(0, 0, 0, 0.58),
+        inset -8px -8px 16px rgba(255, 255, 255, 0.05);
+    }
+
+    .post-card__date {
+      color: #9da7c2;
+      font-size: 0.9rem;
+      grid-column: 1 / 2;
+    }
+
+    .post-card__title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      grid-column: 1 / 2;
+    }
+
+    .post-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      grid-column: 1 / 3;
+    }
+
+    .post-card__arrow {
+      color: #9fb5ff;
+      font-weight: 700;
+      align-self: center;
+      grid-row: 1 / span 2;
+    }
+
+    @media (max-width: 720px) {
+      .posts-hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .tag-pills {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </Layout>

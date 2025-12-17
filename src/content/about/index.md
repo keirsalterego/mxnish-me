@@ -1,5 +1,5 @@
 ---
-name: Manish Kumar Jha
+name: Manish.
 subname: keirsalterego
 avatarFront: /img/me.jpg
 avatarBack: /img/avatar.jpg
@@ -18,7 +18,7 @@ socials:
 
 ---
 
-## Bio
+## $ nvim bio.txt
 
 I’m a B.Tech student in [Computer Science and Engineering](https://silicon.ac.in/bbsr-home/b-tech-computer-science-engineering/) at [Silicon University](https://silicon.ac.in/), moving beyond the application layer to engineer the machinery that powers the decentralized web.
 

@@ -4,27 +4,118 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <article class="prose dark:prose-invert max-w-4xl mx-auto p-6">
-    <header class="mb-8">
-      <h1 class="text-4xl font-bold mb-2">{frontmatter.title}</h1>
-      <time class="text-gray-600 dark:text-gray-400">
+  <section class="journal-article">
+    <div class="journal-article__card">
+      <header class="journal-article__header">
+        <p class="eyebrow">/journal</p>
+        <h1>{frontmatter.title}</h1>
+        <time>
+          {
+            new Date(frontmatter.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })
+          }
+        </time>
         {
-          new Date(frontmatter.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          })
+          frontmatter.description && (
+            <p class="lede">{frontmatter.description}</p>
+          )
         }
-      </time>
-    </header>
-    <div class="prose dark:prose-invert max-w-none">
-      <slot />
+      </header>
+      <article class="journal-article__body prose dark:prose-invert max-w-none">
+        <slot />
+      </article>
     </div>
-  </article>
+  </section>
 </Layout>
 
 <style>
-  :global(.prose a) {
-    @apply text-blue-600 dark:text-blue-400 hover:underline;
+  .journal-article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .journal-article__card {
+    position: relative;
+    padding: 1.75rem;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(14, 16, 23, 0.92);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+  }
+
+  .journal-article__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(79, 141, 255, 0.08), rgba(155, 92, 255, 0.05));
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .journal-article__header,
+  .journal-article__body {
+    position: relative;
+    z-index: 1;
+  }
+
+  .journal-article__header {
+    margin-bottom: 1.25rem;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: #8aa5ff;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .journal-article__header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    letter-spacing: 0.01em;
+  }
+
+  .journal-article__header time {
+    display: block;
+    color: #9da7c2;
+    margin-top: 0.35rem;
+  }
+
+  .lede {
+    margin: 0.7rem 0 0;
+    color: #c5cbe3;
+    max-width: 48ch;
+  }
+
+  .journal-article__body {
+    color: #e8ebf7;
+  }
+
+  :global(.journal-article__body a) {
+    color: #9fb5ff;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  :global(.journal-article__body a:hover) {
+    color: #c6d3ff;
+  }
+
+  @media (max-width: 720px) {
+    .journal-article {
+      padding: 1rem;
+    }
+
+    .journal-article__card {
+      padding: 1.25rem;
+    }
   }
 </style>

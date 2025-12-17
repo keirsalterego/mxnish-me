@@ -2,76 +2,207 @@
 import Layout from "../../layouts/Layout.astro";
 import { getJournalEntries } from "../../utils/journal";
 
-// Get all journal entries sorted by date
 const journalEntries = await getJournalEntries();
-console.log("Journal entries found:", journalEntries.length);
-console.log(
-  "Entries:",
-  journalEntries.map((e) => ({ slug: e.slug, title: e.title }))
-);
+
+const groupedByYear = journalEntries.reduce((acc, entry) => {
+  const year = entry.date.getFullYear().toString();
+  (acc[year] ||= []).push(entry);
+  return acc;
+}, {} as Record<string, typeof journalEntries>);
+
+const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+
+const getExcerpt = (entry: (typeof journalEntries)[number]) => {
+  const src = (entry.description || entry.content || "").replace(/\s+/g, " ").trim();
+  return src.length > 160 ? `${src.slice(0, 157)}...` : src;
+};
 ---
-
-<style>
-  .journal-link {
-    text-decoration: none !important;
-  }
-
-  .journal-link:hover {
-    text-decoration: none !important;
-  }
-
-  .journal-link h2 {
-    transition: opacity 0.2s ease;
-  }
-
-  .journal-link:hover h2 {
-    opacity: 0.7;
-  }
-</style>
-
+---
 <Layout title="Journal">
-  <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-4xl font-bold mb-6 text-center">The Daily Laws</h1>
-    <p
-      class="text-xl text-gray-600 dark:text-gray-400 mb-2 text-center max-w-3xl mx-auto"
-    >
-      Chronicles of Power, Strategy, and Human Nature
-    </p>
-    <div
-      class="max-w-2xl mx-auto mb-8 border-t border-b border-gray-200 dark:border-gray-700 py-4"
-    >
-      <p class="text-center text-gray-600 dark:text-gray-400 italic">
-        "The future belongs to those who learn more skills and combine them in creative
-        ways."
-        <span class="block mt-2 text-sm"
-          >— Robert Greene, <span class="not-italic">Mastery</span></span
-        >
-      </p>
+  <section class="posts-hero">
+    <div>
+      <p class="eyebrow">/journal</p>
+      <h1>The Daily Laws</h1>
+      <p class="lede">Field notes, daily laws, and messy thinking in progress.</p>
     </div>
+    <div class="hero-aside">
+      <p class="quote">
+        "The future belongs to those who learn more skills and combine them in creative ways."
+      </p>
+      <span class="quote-source">— Robert Greene, Mastery</span>
+    </div>
+  </section>
 
+  <section class="posts-grid">
     {
-      journalEntries.length > 0 ? (
-        <ul class="space-y-4">
-          {journalEntries.map((entry) => (
-            <li class="border-b border-gray-100 dark:border-gray-800 pb-4">
-              <a href={`/journal/${entry.slug}`} class="journal-link block py-3 px-4">
-                <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
-                  {entry.title}
-                </h2>
-                <time class="text-gray-500 dark:text-gray-500 text-sm">
-                  {entry.date.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric"
-                  })}
-                </time>
-              </a>
-            </li>
-          ))}
-        </ul>
+      years.length > 0 ? (
+        years.map((year) => (
+          <div class="year-block">
+            <div class="year-label">{year}</div>
+            <div class="year-list">
+              {groupedByYear[year].map((entry) => (
+                <a class="journal-row" href={`/journal/${entry.slug}`}>
+                  <div class="journal-row__date">{formatDate(entry.date)}</div>
+                  <h3 class="journal-row__title">{entry.title}</h3>
+                  <span class="journal-row__arrow" aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
       ) : (
-        <p class="text-gray-600 dark:text-gray-400">No journal entries found.</p>
+        <p class="lede">No journal entries found.</p>
       )
     }
-  </div>
+  </section>
+
+  <style>
+    .posts-hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin: 0 0 1.75rem 0;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      color: #8aa5ff;
+      margin: 0 0 0.2rem 0;
+    }
+
+    .posts-hero h1 {
+      margin: 0;
+      font-size: 2.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    .lede {
+      color: #c5cbe3;
+      margin: 0.3rem 0 0;
+      max-width: 38rem;
+    }
+
+    .hero-aside {
+      max-width: 22rem;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      background: #0d0f16;
+      box-shadow:
+        inset 6px 6px 12px rgba(0, 0, 0, 0.45),
+        inset -6px -6px 12px rgba(255, 255, 255, 0.035);
+      backdrop-filter: none;
+      color: #e8ebf7;
+    }
+
+    .quote {
+      margin: 0 0 0.4rem 0;
+      color: #d7dcf0;
+      line-height: 1.5;
+    }
+
+    .quote-source {
+      color: #9da7c2;
+      font-size: 0.9rem;
+    }
+
+    .posts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .year-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .year-label {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #a8b5ff;
+    }
+
+    .year-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(14, 16, 23, 0.7);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .journal-row {
+      display: grid;
+      grid-template-columns: 1fr 3fr auto;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      text-decoration: none;
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 140ms ease, border-color 140ms ease, transform 120ms ease;
+    }
+
+    .journal-row:last-child {
+      border-bottom: none;
+    }
+
+    .journal-row:hover {
+      background: rgba(20, 22, 30, 0.9);
+      border-color: rgba(138, 165, 255, 0.18);
+      transform: translateX(1px);
+    }
+
+    .journal-row__date {
+      color: #9fb5ff;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .journal-row__title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .journal-row__arrow {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    @media (max-width: 720px) {
+      .posts-hero {
+        flex-direction: column;
+      }
+
+      .hero-aside {
+        width: 100%;
+      }
+
+      .journal-row {
+        grid-template-columns: 1fr 2.5fr auto;
+      }
+    }
+  </style>
 </Layout>

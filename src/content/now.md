@@ -1,3 +1,34 @@
+# December 2025
+
+- **Time Capsule Protocol:** Shipped the trustless time-lock demo with a cleaner unlock flow and added a “future message” preset for quick trials.
+- **ScholrLink:** Rolled out Blink-based one-tap funding; soulbound patron badges now show directly in the profile view.
+- **Reading:** Working through “Designing Data-Intensive Applications” to rethink how I index off-chain metadata.
+
+---
+
+# November 2025
+
+- **On-Chain Chaos:** Prototyped validator-side metrics to watch compute spikes on Solana programs before they hit mainnet.
+- **RustyTasks:** Added fuzzy search and batched sync to stop flooding Mongo on every keystroke.
+
+---
+
+# October 2025
+
+- **ScholrLink:** Implemented rate limits and better error surfacing for failed Blink actions; added a lean Next.js edge cache.
+- **DedCore:** Tuned hashing to skip tiny files and prioritize big wins; shaved another ~8% off runtime on my sample set.
+- **Learning:** Revisiting Solana runtime internals, focusing on how PoH batches interact with program scheduling.
+
+---
+
+# September 2025
+
+- **Time Capsule Protocol:** Added CLI tooling to create/reveal capsules locally before pushing on-chain.
+- **Cube Solver:** Minor UI cleanup and keyboard shortcuts for scrambling and stepping through solutions.
+- **Writing:** Drafted notes on “trustless time as a UX primitive” for a future blog post.
+
+---
+
 # August 2025
 
 - **Solana Smart Contracts:** Building a token swap DApp on Solana using Anchor framework. Currently implementing the swap functionality and writing tests in TypeScript.

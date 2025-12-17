@@ -20,30 +20,550 @@ const { name, subname, avatarFront, avatarBack, tltr, socials } =
 ---
 
 <Layout class="about" title={`About - ${SITE.title}`}>
-  {
-    avatarFront && (
-      <div class="size-30 ml-auto mb-4 mr-1 rotate-3" sm="size-40 -mb-20 mr-2">
-        <FlipImage front={avatarFront} back={avatarBack} alt="avatar" />
+  <section class="landing">
+    <div class="landing__grid">
+      <div class="landing__frame">
+        <p class="landing__badge">$ whoami</p>
+        <h1 class="landing__title">
+          {name}
+          {subname && <span class="landing__sub"> ({subname})</span>}
+        </h1>
+        {tltr && <p class="landing__lede">{tltr}</p>}
+
+        <div class="landing__actions">
+          <a class="cta cta-primary" href="/projects">See projects</a>
+          <a class="cta cta-ghost" href="/journal">Journal</a>
+          <a class="cta cta-ghost" href="/now">Now</a>
+        </div>
+
+        <div class="landing__links">
+          <Links socials={socials} />
+        </div>
+
+        <div class="signal" aria-label="signal ticker">
+          <div class="signal__badge">live signal</div>
+          <div class="signal__window">
+            <div class="signal__tape">
+              <div class="signal__chunk">Shipping tiny experiments nightly.</div>
+              <div class="signal__chunk">Rust, runtimes, and ruthless refactors.</div>
+              <div class="signal__chunk">If it jitters, I profile it.</div>
+              <div class="signal__chunk">Field notes ship before sunrise.</div>
+              <div class="signal__chunk">Shipping tiny experiments nightly.</div>
+              <div class="signal__chunk">Rust, runtimes, and ruthless refactors.</div>
+              <div class="signal__chunk">If it jitters, I profile it.</div>
+              <div class="signal__chunk">Field notes ship before sunrise.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="music" aria-label="recent youtube music">
+          <div class="music__header">
+            <span class="music__badge">YouTube Music</span>
+          </div>
+          <div class="music__rows">
+            <div class="music__row music__row--art">
+              <div class="music__label">Now playing</div>
+              <div class="music__track">
+                <a class="music__link" href="https://music.youtube.com/watch?v=6y9_c5Qavhs" target="_blank" rel="noreferrer">
+                  <img class="music__cover" src="https://i.ytimg.com/vi/6y9_c5Qavhs/hqdefault.jpg" alt="52 Bars cover" loading="lazy" />
+                  <span class="music__ticker-window">
+                    <span class="music__ticker">
+                      <span class="music__title">52 Bars — Karan Aujla & Ikky</span>
+                      <span class="music__title">52 Bars — Karan Aujla & Ikky</span>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="music__row">
+              <div class="music__label">Last played</div>
+              <div class="music__track">
+                <a class="music__link" href="https://music.youtube.com/watch?v=hhssZ5bDa8E" target="_blank" rel="noreferrer">
+                  <img class="music__cover" src="https://i.ytimg.com/vi/hhssZ5bDa8E/hqdefault.jpg" alt="Challa cover" loading="lazy" />
+                  <span class="music__ticker-window">
+                    <span class="music__ticker music__ticker--last">
+                      <span class="music__title">Challa — Rabbi Shergill</span>
+                      <span class="music__title">Challa — Rabbi Shergill</span>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    )
-  }
 
-  <h3 my-0 text-fg-light>$ whoami </h3>
+      <div class="landing__meta">
+        {avatarFront && (
+          <div class="landing__avatar">
+            <FlipImage front={avatarFront} back={avatarBack} alt="avatar" />
+          </div>
+        )}
 
-  <h1 my-1.5>
-    {name}
-    {subname && <font text="base fg-light"> ({subname})</font>}.
-  </h1>
+        <div class="meta-card">
+          <p class="meta-label">Current mode</p>
+          <h3 class="meta-title">Shipping & writing daily</h3>
+          <p class="meta-copy">Carving ideas into products and field notes — quietly, consistently.</p>
+        </div>
 
-  {
-    tltr && (
-      <h5 mb-4 text-fg-light>
-        {tltr}
-      </h5>
-    )
-  }
+        <div class="meta-card">
+          <p class="meta-label">Where to dive in</p>
+          <ul class="meta-list">
+            <li><span class="i-uil:arrow-right" aria-hidden="true" /> Latest build logs in /journal</li>
+            <li><span class="i-uil:arrow-right" aria-hidden="true" /> Long-form notes in /posts</li>
+            <li><span class="i-uil:arrow-right" aria-hidden="true" /> Active experiments in /projects</li>
+          </ul>
+        </div>
 
-  <Links socials={socials} />
+        <div class="meta-card">
+          <p class="meta-label">Current reading</p>
+          <ul class="meta-list">
+            <li><span class="i-uil:arrow-right" aria-hidden="true" /> Meditations — Marcus Aurelius</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Content />
+  <section class="about-body">
+    <div class="about-card">
+      <Content />
+    </div>
+  </section>
+
+  <style>
+    .landing {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .landing__grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .landing__frame {
+      position: relative;
+      padding: 1.6rem 1.7rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #0a0c12;
+      box-shadow:
+        inset 10px 10px 18px rgba(0, 0, 0, 0.6),
+        inset -10px -10px 18px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .landing__frame::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at 20% 20%, rgba(138, 165, 255, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(102, 255, 214, 0.1), transparent 42%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .landing__frame > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .landing__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.32rem 0.75rem;
+      margin: 0 0 0.7rem 0;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0b0d13;
+      box-shadow:
+        inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+        inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+      color: #cfd6f4;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .landing__title {
+      margin: 0 0 0.35rem 0;
+      font-size: 2.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .landing__sub {
+      color: #9da7c2;
+      font-size: 1rem;
+    }
+
+    .landing__lede {
+      margin: 0 0 1.2rem 0;
+      color: #c5cbe3;
+      max-width: 46ch;
+      line-height: 1.6;
+    }
+
+    .landing__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 1.05rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: color 140ms ease, border-color 140ms ease, box-shadow 140ms ease, background 140ms ease;
+    }
+
+    .cta-primary {
+      color: #0c0e15;
+      background: linear-gradient(135deg, rgba(138, 165, 255, 0.85), rgba(102, 255, 214, 0.78));
+      box-shadow:
+        inset 4px 4px 9px rgba(255, 255, 255, 0.16),
+        inset -4px -4px 9px rgba(0, 0, 0, 0.22);
+    }
+
+    .cta-primary:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow:
+        inset 5px 5px 11px rgba(255, 255, 255, 0.18),
+        inset -5px -5px 11px rgba(0, 0, 0, 0.24);
+    }
+
+    .cta-ghost {
+      color: #dfe3f3;
+      background: #0b0d13;
+      box-shadow:
+        inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+        inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .cta-ghost:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow:
+        inset 6px 6px 12px rgba(0, 0, 0, 0.52),
+        inset -6px -6px 12px rgba(255, 255, 255, 0.06);
+    }
+
+    .landing__links {
+      margin-top: 0.6rem;
+    }
+
+    .signal {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0.65rem 0 1.1rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: #0b0d13;
+      box-shadow:
+        inset 7px 7px 14px rgba(0, 0, 0, 0.55),
+        inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .signal__badge {
+      padding: 0.2rem 0.65rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(138, 165, 255, 0.08);
+      color: #dfe3f3;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow:
+        inset 4px 4px 8px rgba(0, 0, 0, 0.5),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+    }
+
+    .signal__window {
+      position: relative;
+      height: 1.6rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+
+    .signal__tape {
+      display: inline-flex;
+      gap: 1.35rem;
+      align-items: center;
+      animation: ticker-loop 26s linear infinite;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .signal__chunk {
+      position: relative;
+      color: #e8ebf7;
+      font-size: 0.95rem;
+      line-height: 1.4rem;
+      white-space: nowrap;
+      padding-left: 1.1rem;
+    }
+
+    .signal__chunk::before {
+      content: "➜";
+      position: absolute;
+      left: 0;
+      color: #66ffd6;
+    }
+
+    @keyframes ticker-loop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .music {
+      margin: 0.6rem 0 0.2rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: #0b0d13;
+      box-shadow:
+        inset 7px 7px 14px rgba(0, 0, 0, 0.55),
+        inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .music__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .music__badge {
+      padding: 0.18rem 0.65rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e8ebf7;
+      letter-spacing: 0.06em;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+    }
+
+    .music__rows {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .music__row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .music__row--art .music__track {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .music__label {
+      color: #9fb5ff;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .music__track {
+      color: #e8ebf7;
+      font-size: 0.98rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .music__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .music__link:hover .music__title {
+      color: #cfd6f4;
+    }
+
+    .music__cover {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.35),
+        inset 3px 3px 6px rgba(0, 0, 0, 0.35),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.08);
+    }
+
+    .music__title {
+      color: #e8ebf7;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .music__ticker-window {
+      display: inline-flex;
+      align-items: center;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+      min-width: 120px;
+    }
+
+    .music__ticker {
+      display: inline-flex;
+      gap: 1.2rem;
+      animation: music-ticker 14s linear infinite;
+      will-change: transform;
+    }
+
+    .music__ticker--last {
+      animation-duration: 18s;
+    }
+
+    .music__ticker .music__title {
+      white-space: nowrap;
+    }
+
+    @keyframes music-ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+
+
+
+    .landing__meta {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 0.9rem;
+      align-content: start;
+    }
+
+    .landing__avatar {
+      justify-self: end;
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      padding: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0a0c12;
+      box-shadow:
+        inset 7px 7px 14px rgba(0, 0, 0, 0.55),
+        inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+    }
+
+    .meta-card {
+      padding: 1rem 1.1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0b0d13;
+      box-shadow:
+        inset 7px 7px 14px rgba(0, 0, 0, 0.55),
+        inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+    }
+
+    .meta-label {
+      margin: 0 0 0.35rem 0;
+      color: #9da7c2;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .meta-title {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.15rem;
+    }
+
+    .meta-copy {
+      margin: 0;
+      color: #c5cbe3;
+      line-height: 1.55;
+    }
+
+    .meta-list {
+      margin: 0.2rem 0 0;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+      color: #dfe3f3;
+    }
+
+    .meta-list .i-uil:arrow-right {
+      color: #9fb5ff;
+      margin-right: 0.4rem;
+      font-size: 1rem;
+      vertical-align: -0.1em;
+    }
+
+    .about-body {
+      margin: 0 auto 2.5rem;
+      max-width: 980px;
+    }
+
+    .about-card {
+      padding: 1.25rem 1.4rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: #0a0c12;
+      box-shadow:
+        inset 8px 8px 16px rgba(0, 0, 0, 0.58),
+        inset -8px -8px 16px rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 960px) {
+      .landing__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .landing__meta {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-rows: none;
+      }
+
+      .landing__avatar {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .landing__title {
+        font-size: 2rem;
+      }
+
+      .landing__frame,
+      .meta-card,
+      .about-card {
+        border-radius: 14px;
+      }
+    }
+  </style>
 </Layout>

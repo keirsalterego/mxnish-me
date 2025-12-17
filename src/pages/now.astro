@@ -3,84 +3,237 @@ import Layout from "../layouts/Layout.astro";
 import nowRaw from "../content/now.md?raw";
 import { marked } from "marked";
 
-// Split now.md into entries
 const entries = nowRaw
   .split(/\n---+\n/)
   .map((e) => e.trim())
   .filter(Boolean);
+
 const [latest, ...archive] = entries;
+
+const extractTitle = (entry: string) => entry.match(/^#\s+(.+)/m)?.[1] ?? "Recently";
+const stripHeading = (entry: string) => entry.replace(/^#.+\n+/, "");
+
+const latestTitle = extractTitle(latest ?? "");
 ---
-
-<Layout title="NOW">
-  <main class="container mx-auto px-4 py-8">
-    <div class="max-w-3xl mx-auto">
-      <div class="mb-12">
-        <h1 class="text-4xl font-black tracking-tight text-white mb-4">Log.</h1>
-        <p class="text-gray-400 text-lg">
-          Last updated: {latest.match(/# (.+)/)?.[1] ?? "Recently"}
-        </p>
+<Layout title="Now">
+  <main class="now-shell">
+    <section class="now-hero">
+      <div>
+        <p class="eyebrow">/now</p>
+        <h1>What I'm doing now</h1>
+        <p class="lede">A running log of what I'm building, learning, and tinkering with.</p>
       </div>
-
-      <section class="mb-12">
-        <div class="prose prose-invert max-w-none">
-          <Fragment set:html={marked.parse(latest)} />
-        </div>
-      </section>
-
-      {
-        archive.length > 0 && (
-          <section>
-            <h2 class="text-2xl font-bold text-white mb-6 mt-10">Archive</h2>
-            <div class="space-y-10">
-              {archive.map((entry) => (
-                <div class="prose prose-invert max-w-none border-l border-gray-700 pl-4">
-                  <Fragment set:html={marked.parse(entry)} />
-                </div>
-              ))}
-            </div>
-          </section>
-        )
-      }
-
-      <div class="mt-12 text-center">
-        <p class="text-gray-400">
-          This page is inspired by <a
-            href="https://nownownow.com/about"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white hover:text-gray-300 transition-colors"
-            >Derek Sivers' /now page movement</a
-          >
-        </p>
+      <div class="now-meta">
+        <p class="meta-label">Last updated</p>
+        <p class="meta-value">{latestTitle}</p>
       </div>
-    </div>
+    </section>
+
+    <section class="now-latest">
+      <div>
+        <p class="eyebrow">Latest</p>
+        <h2>{latestTitle}</h2>
+      </div>
+      <div class="now-body prose prose-invert max-w-none">
+        <Fragment set:html={marked.parse(stripHeading(latest))} />
+      </div>
+    </section>
+
+    {
+      archive.length > 0 && (
+        <section class="archive">
+          <div class="archive__header">
+            <p class="eyebrow">Previous months</p>
+            <h3>Earlier logs</h3>
+          </div>
+          <div class="archive-list">
+            {archive.map((entry, idx) => {
+              const title = extractTitle(entry);
+              return (
+                <article class={`archive-row ${idx === archive.length - 1 ? "archive-row--last" : ""}`}>
+                  <div class="archive-row__title">{title}</div>
+                  <div class="archive-row__body prose prose-invert max-w-none">
+                    <Fragment set:html={marked.parse(stripHeading(entry))} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
+
+    <footer class="now-footer">
+      <p>
+        Inspired by <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">Derek Sivers' /now movement</a>.
+      </p>
+    </footer>
   </main>
 </Layout>
 
 <style>
-  section {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease-out forwards;
+  .now-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  section:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-  section:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-  section:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-  section:nth-child(4) {
-    animation-delay: 0.4s;
+  .now-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
   }
 
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: #8aa5ff;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .now-hero h1 {
+    margin: 0;
+    font-size: 2.6rem;
+    letter-spacing: 0.01em;
+  }
+
+  .lede {
+    margin: 0.35rem 0 0;
+    color: #c5cbe3;
+    max-width: 46rem;
+  }
+
+  .now-meta {
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: #0d0f16;
+    box-shadow:
+      inset 6px 6px 12px rgba(0, 0, 0, 0.45),
+      inset -6px -6px 12px rgba(255, 255, 255, 0.035);
+    backdrop-filter: none;
+    min-width: 200px;
+  }
+
+  .meta-label {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #9da7c2;
+  }
+
+  .meta-value {
+    margin: 0.2rem 0 0;
+    font-weight: 700;
+    color: #e8ebf7;
+    font-size: 1.1rem;
+  }
+
+  .now-latest {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: #0d0f16;
+    box-shadow:
+      inset 6px 6px 12px rgba(0, 0, 0, 0.45),
+      inset -6px -6px 12px rgba(255, 255, 255, 0.035);
+  }
+
+  .now-latest h2 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+
+  .now-body {
+    color: #e8ebf7;
+  }
+
+  .archive {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .archive__header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  .archive-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 4fr auto;
+    gap: 0.9rem;
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    color: #e8ebf7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    box-shadow: none;
+    overflow: hidden;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+
+  .archive-row:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.14);
+    transform: none;
+  }
+
+  .archive-row--last {
+    border-bottom: none;
+  }
+
+  .archive-row__title {
+    font-weight: 800;
+    color: #e8ebf7;
+    white-space: nowrap;
+  }
+
+  .archive-row__body {
+    color: #dfe3f3;
+  }
+
+  .now-footer {
+    margin-top: 0.5rem;
+    text-align: center;
+    color: #9da7c2;
+  }
+
+  .now-footer a {
+    color: #c6d3ff;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 800px) {
+    .now-hero {
+      flex-direction: column;
+    }
+
+    .now-meta {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .archive-row {
+      grid-template-columns: 1fr 3fr auto;
     }
   }
 </style>

@@ -1,64 +1,27 @@
 ---
 projects:
-  Websites / Online Tools:
-    - name: Portfolio
-      link: https://macos.mxnish.me/
-      desc: A portfolio website simulating macOS's GUI
-      icon: i-ic:twotone-laptop-mac
-      tech:
-        - i-logos:preact
-        - i-logos:typescript-icon
-        - i-logos:unocss
-        - i-logos:vitejs
-      repo: keirsalterego/play-macos
-    - name: WaveX
-      link: https://wavex.mxnish.me
-      desc: A web-based, local-first platform for meetings with screen sharing, recording, and chat.
-      icon: oh-my-cv
-      tech:
-        - i-logos:nuxt-icon
-        - i-logos:typescript-icon
-        - i-logos:unocss
-        - i-simple-icons:pwa
-      repo: keirsalterego/wavex
+  Shiny Things on the Web:
     - name: Cube Solver
       link: https://cubejs.mxnish.me
       desc: A solver for Rubik's Cube
-      icon: i-fluent:cube-24-regular
+      icon: i-ph:cube-duotone
       tech:
         - i-logos:javascript
         - i-vscode-icons:file-type-html
         - i-vscode-icons:file-type-css
       repo: keirsalterego/cube.js
-    - name: Deckflare
-      link: https://www.deckflare.vercel.app
-      desc: A results-driven, full-service marketing agency helping brands grow and connect with their audience.
-      icon: i-game-icons:fish-escape
-      tech:
-        - i-logos:nextjs-icon
-        - i-logos:ant-design
-      repo: keirsalterego/Deckflare
-    - name: IRCTC (Redesign)
-      desc: Still in development.
-      icon: i-icon-park-outline:game-ps
-      tech:
-        - i-logos:vue
-        - i-logos:typescript-icon
-        - i-logos:tailwindcss-icon
-        - i-logos:vitejs
-      repo: keirsalterego/IRCTC
-  RUST:
+  Rust & Rockets:
     - name: DedCore
       link: https://dedcore.live
       desc: A high-performance file deduplication tool with TUI, featuring multi-algorithm hashing and smart filtering.
-      icon: i-heroicons-solid:duplicate
+      icon: i-ph:copy-duotone
       tech:
         - i-logos:rust
       repo: keirsalterego/dedcore
     - name: RustyTasks
       link: https://github.com/keirsalterego/rustytasks
       desc: Conquer your tasks with ruthless efficiency using this command-line powerhouse.
-      icon: i-heroicons-solid:fire
+      icon: i-ph:check-square-offset-duotone
       tech:
         - i-logos:rust
         - i-logos:mongodb
@@ -67,11 +30,11 @@ projects:
       desc: Keir Lang, Because 9000 programming languages just weren't enough.
       tech:
         - i-logos:rust
-      icon: i-ph:microphone-bold
+      icon: i-ph:code-duotone
     - name: Super Manager
       link: https://github.com/keirsalterego/super-manager
       desc: A lightning fast File Manager. (development)
-      icon: i-iconoir:grid-remove
+      icon: i-ph:folders-duotone
       tech:
         - i-logos:rust
         - i-logos:vitejs
@@ -79,18 +42,29 @@ projects:
     - name: FireFox
       link: https://github.com/keirsalterego/FireFox
       desc: A browser made with rust (development)
-      icon: i-icon-park-outline:game-ps
+      icon: i-ph:globe-hemisphere-west-duotone
       tech:
         - i-logos:rust
         - i-logos:vitejs
         - i-logos:tailwindcss-icon
-  PYTHON:
-    - name: Maya
-      link: https://github.com/keirsalterego/play-maya
-      desc: That one minimalist LLM assistant I'd love to have at my place!
-      icon: oh-my-cv
+  On-Chain Chaos (Anchor & Solana):
+    - name: Time Capsule Protocol
+      link: https://time-capsule-protocol.vercel.app
+      desc: "Trustless time-locking: encrypt now, auto-reveal later—no intermediaries."
+      icon: i-ph:lock-key-duotone
       tech:
-        - i-logos:python
-        - i-logos:md
+        - i-simple-icons:solana
+        - i-logos:rust
+        - i-carbon:time
+      repo: keirsalterego/tc-protocol
+    - name: ScholrLink
+      link: https://scholr-link.vercel.app
+      desc: "Social posts become one-tap Solana funding portals with Blinks and soulbound patron badges."
+      icon: i-ph:graduation-cap-duotone
+      tech:
+        - i-simple-icons:solana
+        - i-logos:rust
+        - i-simple-icons:nextdotjs
+      repo: keirsalterego/scholr.link
+  PRs/MRs That Actually Merged: []
 ---
-I'm trying to find a balance between building stuff and engineering.

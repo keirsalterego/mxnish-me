@@ -34,3 +34,118 @@ header .blink {
     opacity: 0;
   }
 }
+
+/* Hero social buttons */
+.about .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 13, 20, 0.9);
+  color: #e7ecff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease,
+    background 120ms ease, color 120ms ease;
+}
+
+.about .btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(18, 20, 30, 0.94);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.46);
+  color: #ffffff;
+}
+
+.about .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Projects grid cards: dark neo-glass look */
+.project-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: #0c0e15;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 0, 0, 0.38),
+    inset -4px -4px 9px rgba(255, 255, 255, 0.03);
+  backdrop-filter: none;
+  color: #e8ebf7;
+  text-decoration: none;
+  transition: color 140ms ease, border-color 140ms ease;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: none;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.03);
+  background: #0c0e15;
+  box-shadow:
+    inset 4px 4px 9px rgba(0, 0, 0, 0.38),
+    inset -4px -4px 9px rgba(255, 255, 255, 0.03);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Make Rust tech icon visible on dark cards */
+.project-card [class*="i-logos:rust"] {
+  color: #ffffff !important;
+  filter: invert(1) brightness(1.6);
+}
+
+/* Tech icon sizing inside project cards */
+.project-card .tech-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.project-links {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #9fb5ff;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  font-size: 0.95rem;
+  transition: color 120ms ease;
+}
+
+.project-link-btn:hover {
+  color: #c6d3ff;
+}
+
