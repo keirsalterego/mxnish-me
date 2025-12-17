@@ -17,7 +17,7 @@ export const Navbar: Component<{
           class="font-semibold text-fg-light hover:text-fg-dark text-base tracking-tight flex items-center gap-1"
           href="/"
         >
-          hi@mxnish
+          hi@keir
           <span class="blink">_</span>
         </a>
       </div>
