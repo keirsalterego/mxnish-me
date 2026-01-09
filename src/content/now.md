@@ -1,3 +1,11 @@
+# January 2026
+
+- **Open Source:** Merged PR into rust-lang/rust-clippy fixing over-borrowed suggestions in the `useless_conversion` lint, improving code quality for the entire Rust ecosystem.
+- **DedCore:** Optimizing parallel hashing with rayon to handle massive file sets without memory blowup.
+- **Learning:** Diving deeper into Rust compiler internals and type inference for better lint contributions.
+
+---
+
 # December 2025
 
 - **Time Capsule Protocol:** Shipped the trustless time-lock demo with a cleaner unlock flow and added a “future message” preset for quick trials.

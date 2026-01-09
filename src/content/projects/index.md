@@ -1,5 +1,12 @@
 ---
 projects:
+  PRs/MRs That Actually Merged:
+    - name: Rust Clippy - useless_conversion lint
+      link: https://github.com/rust-lang/rust-clippy/pull/16238
+      desc: Enhanced .into_iter() suggestions for nested references, fixing over-borrowed code patterns in the official Rust linter.
+      icon: i-ph:git-merge-duotone
+      tech:
+        - i-logos:rust
   Shiny Things on the Web:
     - name: Cube Solver
       link: https://cubejs.mxnish.me
@@ -66,5 +73,4 @@ projects:
         - i-logos:rust
         - i-simple-icons:nextdotjs
       repo: keirsalterego/scholr.link
-  PRs/MRs That Actually Merged: []
 ---
