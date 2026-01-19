@@ -134,3 +134,4 @@ if (CONTINUOUS_MODE) {
   runContinuously();
 } else {
   syncJournal();
+}
