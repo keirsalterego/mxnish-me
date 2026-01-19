@@ -24,17 +24,33 @@ src/content/journal/        # Astro content collection
 
 ## Usage Options
 
-### Option 1: Manual Sync (one-shot)
+### Option 1: Continuous Sync Every 30 Minutes (Recommended)
 ```bash
 pnpm sync-journal
 ```
 
 This will:
+- ⏰ Check for changes every 30 minutes
+- 🔄 Automatically sync files from `obsidian/journal/` to `src/content/journal/`
+- ✨ Normalize frontmatter for each Obsidian entry
+- 🗑️ Remove stale files from the website
+- 💾 Commit changes to Git (only if changes detected)
+- 🚀 Push to remote repository
+- ✅ Deploy to your website
+- 🔁 Keep running indefinitely
+
+### Option 2: Manual One-Time Sync
+```bash
+pnpm sync-journal:once
+```
+
+This will:
+- Run once and exit
 - Normalize frontmatter for each Obsidian entry
 - Mirror files into `src/content/journal/` (stale files are removed)
 - Commit and push changes to origin
 
-### Option 2: Automatic File Watching (Recommended)
+### Option 3: Automatic File Watching (Alternative)
 ```bash
 pnpm watch-journal
 ```
@@ -50,24 +66,24 @@ This will:
 ### After a reset: quick setup
 
 1. Install dependencies once: `pnpm install`
-2. Seed the repo with your latest notes: `pnpm sync-journal`
-3. For continuous sync while writing: `pnpm watch-journal` (leave it running in a terminal)
+2. Seed the repo with your latest notes: `pnpm sync-journal:once`
+3. For continuous automatic sync: `pnpm sync-journal` (leave it running in a terminal)
 4. Verify on the site after the push completes
 
-### Auto-start watcher on login (Linux systemd user service)
+### Auto-start sync on login (Linux systemd user service)
 
 1) Create a user service file:
 
-`~/.config/systemd/user/watch-journal.service`
+`~/.config/systemd/user/sync-journal.service`
 ```ini
 [Unit]
-Description=Watch Obsidian journal and sync after inactivity
+Description=Sync Obsidian journal every 30 minutes
 After=network.target
 
 [Service]
 Type=simple
 WorkingDirectory=/home/keirsalterego/mxnish-me
-ExecStart=/usr/bin/env pnpm watch-journal
+ExecStart=/usr/bin/env pnpm sync-journal
 Restart=always
 RestartSec=5
 
@@ -78,17 +94,17 @@ WantedBy=default.target
 2) Enable and start it:
 ```bash
 systemctl --user daemon-reload
-systemctl --user enable --now watch-journal.service
+systemctl --user enable --now sync-journal.service
 ```
 
 3) Check logs if needed:
 ```bash
-journalctl --user -u watch-journal.service -f
+journalctl --user -u sync-journal.service -f
 ```
 
 Notes:
 - Make sure `pnpm` is on your PATH for the user session (the `env` shebang will pick it up).
-- The watcher waits for ~30 minutes of no edits before syncing/committing/pushing.
+- The script checks for changes every 30 minutes and only commits/pushes if changes are detected.
 
 ## Journal Entry Format
 

@@ -7,7 +7,8 @@
     "build": "astro build",
     "serve": "astro preview --host",
     "lint": "eslint .",
-    "sync-journal": "node scripts/sync-journal.js",
+    "sync-journal": "node scripts/sync-journal.js --watch",
+    "sync-journal:once": "node scripts/sync-journal.js",
     "watch-journal": "node scripts/watch-journal.js"
   },
   "prettier": "@renovamen/prettier-config",
